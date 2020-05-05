@@ -8,3 +8,9 @@
   border: 2px solid #FFFFFF;
   border-radius: 2px;
 }
+
+.profile__button-add:hover {
+  transition: .2s;
+  opacity: .5;
+  cursor: pointer;
+}
