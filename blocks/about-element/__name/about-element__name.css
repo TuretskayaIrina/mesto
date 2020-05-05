@@ -5,4 +5,7 @@
   color: #000000;
   margin: 0;
   padding-left: 21px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+

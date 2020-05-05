@@ -5,3 +5,10 @@
   margin: 0;
   padding-bottom: 16px;
 }
+
+@media screen and (max-width : 1000px) {
+  .profile__name {
+    font-size: 27px;
+    padding-bottom: 14px;
+  }
+}

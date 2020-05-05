@@ -4,7 +4,19 @@
   max-width: 882px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(3, 282px);
+  grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));;
   grid-column-gap: 18px;
   grid-row-gap: 20px;
+}
+
+@media screen and (max-width : 1000px) {
+  .elements {
+    max-width: 584px;
+  }
+}
+
+@media screen and (max-width : 650px) {
+  .elements {
+    max-width: 282px;
+  }
 }

@@ -8,12 +8,18 @@
 @import url('./__button-add/profile__button-add.css');
 
 
-.profile{
-  width: 882px;
+.profile {
+  max-width: 882px;
   color: #ffffff;
   margin: 40px auto 51px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+
+@media screen and (max-width : 1000px) {
+  .profile {
+    flex-direction: column;
+  }
 }
