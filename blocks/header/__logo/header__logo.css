@@ -10,6 +10,7 @@
 .header__logo:hover {
   transition: .2s;
   opacity: .5;
+  cursor: pointer;
 }
 
 @media screen and (max-width : 1024px) {

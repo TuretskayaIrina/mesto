@@ -1,0 +1,10 @@
+@import url('../element/element.css');
+
+.elements {
+  max-width: 882px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 282px);
+  grid-column-gap: 18px;
+  grid-row-gap: 20px;
+}
