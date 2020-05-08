@@ -2,6 +2,7 @@
   font-size: 18px;
   line-height: 22px;
   margin: 0;
+  word-break: break-word;
 }
 
 @media screen and (max-width : 1000px) {

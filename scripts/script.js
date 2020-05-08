@@ -10,10 +10,10 @@ element.addEventListener(eventName, handler);
 let element = document.querySelector('.my-element');
 */
 
-let profileButtonEdit = document.querySelector('.profile__button-edit');
-let popupButtonClose = document.querySelector('.popup__button-close');
-let popup = document.querySelector('.popup');
-let formElement = document.querySelector('.popup__form');
+const profileButtonEdit = document.querySelector('.profile__button-edit');
+const popupButtonClose = document.querySelector('.popup__button-close');
+const popup = document.querySelector('.popup');
+const formElement = document.querySelector('.popup__form');
 let nameInput = document.querySelector('.popup__name');
 let jobInput = document.querySelector('.popup__profession');
 let profileName = document.querySelector('.profile__name');
