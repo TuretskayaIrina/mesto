@@ -1,4 +1,4 @@
-.about-element__like {
+.elements__like {
   background: none;
   background-image: url('../../../images/like.svg');
   background-repeat: no-repeat;
@@ -10,7 +10,7 @@
   margin-right: 18px;
 }
 
-.about-element__like:hover {
+.elements__like:hover {
   transition: .2s;
   opacity: .5;
   cursor: pointer;

@@ -1,7 +1,5 @@
-@import url('./__img/element__img.css');
-@import url('../about-element/about-element.css');
 
-.element {
+.elements__place {
   display: flex;
   flex-direction: column;
   border-radius: 10px 10px 0px 0px;
