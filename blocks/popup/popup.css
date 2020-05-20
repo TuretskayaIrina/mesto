@@ -5,6 +5,8 @@
 @import url('./__input/popup__input.css');
 @import url('./__input/_name/popup__input_name.css');
 @import url('./__input/_profession/popup__input_profession.css');
+@import url('./__input/_place/popup__input_place.css');
+@import url('./__input/_link/popup__input_link.css');
 @import url('./__button-save/popup__button-save.css');
 @import url('./__button-close/popup__button-close.css');
 
