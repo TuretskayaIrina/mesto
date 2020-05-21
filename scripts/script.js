@@ -92,8 +92,11 @@ function createCard (item){
   // поставить лайк
   buttonLike.addEventListener('click', function (evt) {
     evt.target.classList.toggle("elements__like_active");
-    console.log('working');
   });
+
+  //удалить
+  buttonDelete.addEventListener('click', deleteClickHandler);
+
   //добавили в начало массива
   cardContainer.prepend(cardElement);
 }
@@ -131,8 +134,10 @@ function popupAddSubmitHandler (evt) {
   // поставить лайк
   buttonLike.addEventListener('click', function (evt) {
     evt.target.classList.toggle("elements__like_active");
-    console.log('working');
   });
+
+  //удалить
+  buttonDelete.addEventListener('click', deleteClickHandler);
 
   //добавили в начало массива
   cardContainer.prepend(cardElement);
@@ -144,3 +149,10 @@ function popupAddSubmitHandler (evt) {
 buttonAdd.addEventListener('click', showPopupAdd);
 popupButtonCloseAdd.addEventListener('click', () => togglePopup(popupAdd));
 popupAdd.addEventListener('submit', popupAddSubmitHandler);
+
+// удаление карточки и слушателей
+function deleteClickHandler(evt) {
+  const cardElement = evt.target.closest('.elements__place');
+  evt.target.removeEventListener('click', deleteClickHandler);
+  cardElement.remove();
+}
