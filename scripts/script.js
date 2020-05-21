@@ -38,12 +38,6 @@ function popupEditSubmitHandler (evt) {
   togglePopup(popup);
 }
 
-//открытие попапа - добавления карточки
-function showPopupAdd() {
-  togglePopup(popupAdd);
-  formCreateCard.reset();
-}
-
 //слушатели для попапа - редактирование профиля
 profileButtonEdit.addEventListener('click', showPopupEdite);
 popupButtonCloseEdite.addEventListener('click', () => togglePopup(popupEdite));
@@ -94,12 +88,24 @@ function createCard (item){
   cardElement.querySelector('.elements__img').alt = item.name;
   //название места
   cardElement.querySelector('.elements__name').textContent = item.name;
+
+  // поставить лайк
+  buttonLike.addEventListener('click', function (evt) {
+    evt.target.classList.toggle("elements__like_active");
+    console.log('working');
+  });
   //добавили в начало массива
   cardContainer.prepend(cardElement);
 }
 
 //пройдись по массиву и выполни функцию для каждого элемента
 initialCards.forEach(createCard);
+
+//открытие попапа - добавления карточки
+function showPopupAdd() {
+  togglePopup(popupAdd);
+  formCreateCard.reset();
+}
 
 //добавление новых карточек
 function popupAddSubmitHandler (evt) {
@@ -121,6 +127,13 @@ function popupAddSubmitHandler (evt) {
   cardElement.querySelector('.elements__img').alt = placeInput.value;
   //название места
   cardElement.querySelector('.elements__name').textContent = placeInput.value;
+
+  // поставить лайк
+  buttonLike.addEventListener('click', function (evt) {
+    evt.target.classList.toggle("elements__like_active");
+    console.log('working');
+  });
+
   //добавили в начало массива
   cardContainer.prepend(cardElement);
 
