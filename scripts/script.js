@@ -6,13 +6,17 @@ const buttonAdd = document.querySelector('.profile__button-add');
 const popup = document.querySelector('.popup');
 const popupEdite = document.querySelector('.popup-edite');
 const popupAdd = document.querySelector('.popup-add');
-const formElement = document.querySelector('.popup__form');
+const formCreateCard = popupAdd.querySelector('form');
+
 let nameInput = document.querySelector('.popup__input_name');
 let jobInput = document.querySelector('.popup__input_profession');
 let profileName = document.querySelector('.profile__name');
 let profileJob = document.querySelector('.profile__profession');
+
 let placeInput = document.querySelector('.popup__input_place');
-let linlInput = document.querySelector('.popup__input_link');
+let linkInput = document.querySelector('.popup__input_link');
+let placeName = document.querySelector('.elements__name');
+let placeImg = document.querySelector('.elements__img');
 
 //открытие - закрытие попапов
 function togglePopup(popup) {
@@ -27,7 +31,7 @@ function showPopupEdite() {
 }
 
 //сохранить изменения в профиле
-function formSubmitHandler (evt) {
+function popupEditSubmitHandler (evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
@@ -37,16 +41,13 @@ function formSubmitHandler (evt) {
 //открытие попапа - добавления карточки
 function showPopupAdd() {
   togglePopup(popupAdd);
+  formCreateCard.reset();
 }
 
 //слушатели для попапа - редактирование профиля
 profileButtonEdit.addEventListener('click', showPopupEdite);
 popupButtonCloseEdite.addEventListener('click', () => togglePopup(popupEdite));
-formElement.addEventListener('submit', formSubmitHandler);
-
-//слушатели для попапа - добавления карточек
-buttonAdd.addEventListener('click', showPopupAdd);
-popupButtonCloseAdd.addEventListener('click', () => togglePopup(popupAdd));
+popupEdite.addEventListener('submit', popupEditSubmitHandler);
 
 //массив дефолтных карточек
 const initialCards = [
@@ -76,8 +77,6 @@ const initialCards = [
   }
 ];
 
-
-
 //шаблон создания карточек
 function createCard (item){
   //секция куда добавлять карточки
@@ -95,10 +94,40 @@ function createCard (item){
   cardElement.querySelector('.elements__img').alt = item.name;
   //название места
   cardElement.querySelector('.elements__name').textContent = item.name;
-
+  //добавили в начало массива
   cardContainer.prepend(cardElement);
 }
 
-
 //пройдись по массиву и выполни функцию для каждого элемента
 initialCards.forEach(createCard);
+
+//добавление новых карточек
+function popupAddSubmitHandler (evt) {
+  evt.preventDefault();
+  togglePopup(popupAdd);
+
+  //почему этот вариант не работет?
+  //createCard(linkInput.value, placeInput.value);
+
+  //шаблон function createCard
+  const cardContainer = document.querySelector('.elements');
+  const cardTemplate = document.querySelector('.elements-template');
+  const cardElement = cardTemplate.content.cloneNode(true);
+  const buttonLike  = cardElement.querySelector('.elements__like');
+  const buttonDelete = cardElement.querySelector('.elements__delete');
+
+  //добавили картинку
+  cardElement.querySelector('.elements__img').src = linkInput.value;
+  cardElement.querySelector('.elements__img').alt = placeInput.value;
+  //название места
+  cardElement.querySelector('.elements__name').textContent = placeInput.value;
+  //добавили в начало массива
+  cardContainer.prepend(cardElement);
+
+  formCreateCard.reset();
+}
+
+//слушатели для попапа - добавления карточек
+buttonAdd.addEventListener('click', showPopupAdd);
+popupButtonCloseAdd.addEventListener('click', () => togglePopup(popupAdd));
+popupAdd.addEventListener('submit', popupAddSubmitHandler);
