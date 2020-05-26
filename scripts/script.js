@@ -2,10 +2,12 @@
 const profileButtonEdit = document.querySelector('.profile__button-edit');
 const popupButtonCloseEdite = document.querySelector('.popup__edite-close');
 const popupButtonCloseAdd = document.querySelector('.popup__add-close');
+const popupButtonClosePicture = document.querySelector('.popup__picture-close');
 const buttonAdd = document.querySelector('.profile__button-add');
 const popup = document.querySelector('.popup');
 const popupEdite = document.querySelector('.popup-edite');
 const popupAdd = document.querySelector('.popup-add');
+const popupPicture = document.querySelector('.popup-picture');
 const formCreateCard = popupAdd.querySelector('form');
 
 let nameInput = document.querySelector('.popup__input_name');
@@ -17,6 +19,9 @@ let placeInput = document.querySelector('.popup__input_place');
 let linkInput = document.querySelector('.popup__input_link');
 let placeName = document.querySelector('.elements__name');
 let placeImg = document.querySelector('.elements__img');
+
+let popupImage = document.querySelector('.popup__image');
+let popupCaption = document.querySelector('.popup__caption');
 
 //открытие - закрытие попапов
 function togglePopup(popup) {
@@ -97,6 +102,9 @@ function createCard (item){
   //удалить
   buttonDelete.addEventListener('click', deleteClickHandler);
 
+  //открыть в полном размере
+  cardElement.querySelector('.elements__img').addEventListener('click', showPopupPicture);
+
   //добавили в начало массива
   cardContainer.prepend(cardElement);
 }
@@ -138,6 +146,8 @@ function popupAddSubmitHandler (evt) {
 
   //удалить
   buttonDelete.addEventListener('click', deleteClickHandler);
+  //открыть в полном размере
+  cardElement.querySelector('.elements__img').addEventListener('click', showPopupPicture);
 
   //добавили в начало массива
   cardContainer.prepend(cardElement);
@@ -156,3 +166,15 @@ function deleteClickHandler(evt) {
   evt.target.removeEventListener('click', deleteClickHandler);
   cardElement.remove();
 }
+
+//открытие попапа - просмотр изображения
+function showPopupPicture() {
+  popupImage.src = document.querySelector('.elements__img').src
+  popupImage.alt = document.querySelector('.elements__img').alt
+  popupCaption.textContent = document.querySelector('.elements__img').alt;
+  togglePopup(popupPicture);
+}
+
+//слушатели для попапа - просмотр изображения
+popupImage.addEventListener('click', showPopupPicture);
+popupButtonClosePicture.addEventListener('click', () => togglePopup(popupPicture));
