@@ -1,9 +1,4 @@
 .popup__container {
- margin-left: 40.7px;
-}
-
-@media screen and (max-width : 650px) {
-  .popup__container {
-    margin-left: 20px;
-  }
+  display: flex;
+  margin: 0 auto;
 }

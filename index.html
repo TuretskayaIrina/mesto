@@ -36,11 +36,13 @@
         </section>
 
         <div class="popup popup-picture">
-          <figure class="popup__container">
-            <img src="https://images.unsplash.com/photo-1587228638596-cea3e4bc244b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80" alt="" class="popup__image">
-            <figcaption class="popup__caption">тут будет капча</figcaption>
+          <div class="popup__container">
+            <figure class="popup__figure">
+              <img src="https://images.unsplash.com/photo-1587228638596-cea3e4bc244b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80" alt="" class="popup__image">
+              <figcaption class="popup__caption">тут будет капча</figcaption>
+            </figure>
             <button class="popup__button-close popup__picture-close" type="button"></button>
-          </figure>
+          </div>
         </div>
 
         <div class="popup popup-edite">
@@ -51,8 +53,8 @@
               <input class="popup__input popup__input_profession" type="text" name="jobInput" value="">
               <button class="popup__button-save" type="submit">Сохранить</button>
             </form>
+            <button class="popup__button-close popup__edite-close" type="button"></button>
           </div>
-          <button class="popup__button-close popup__edite-close" type="button"></button>
         </div>
 
         <div class="popup popup-add">
@@ -63,8 +65,8 @@
               <input class="popup__input popup__input_link" type="url" name="linkInput" value="" placeholder="Ссылка на картинку">
               <button class="popup__button-save" type="submit">Создать</button>
             </form>
+            <button class="popup__button-close popup__add-close" type="button"></button>
           </div>
-          <button class="popup__button-close popup__add-close" type="button"></button>
         </div>
 
       </main>
