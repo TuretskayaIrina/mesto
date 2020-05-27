@@ -5,6 +5,7 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  margin-bottom: 41px;
 }
 
 .header__logo:hover {
@@ -17,5 +18,7 @@
   .header__logo {
     width: 103.74px;
     height: 24.4px;
+    margin-bottom: 32px;
+    margin-left: 27px;
   }
 }

@@ -12,6 +12,8 @@
 @import url('./__caption/popup__caption.css');
 @import url('./__image/popup__image.css');
 @import url('./__figure/popup__figure.css');
+@import url('./_bg-opacity-light/popup_bg-opacity-light.css');
+@import url('./_bg-opacity-dark/popup_bg-opacity-dark.css');
 
 
 .popup {
@@ -20,10 +22,12 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, .5);
   display: flex;
   align-items: center;
   justify-content: center;
-  display: none;
+  display: flex;
   z-index: 1;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear;
 }

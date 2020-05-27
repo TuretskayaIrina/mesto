@@ -8,13 +8,14 @@ ___
  - Адаптивная верстка
  - Работа с дизайн-макетом Figma
  - Подключение сторонних шрифтов
- - Добавленна интерактивность с помощю Java Script
+ - Добавленна логика и интерактивность с помощю Java Script
  - GIT
  ___
 
 **Figma**
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4?node-id=80%3A76)
+* [Первая часть макета в Figma](https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4?node-id=80%3A76)
+* [Вторая часть макета в Figma](https://www.figma.com/file/nlYpT4VhFiwimn2YlncrcF/JavaScript.-Sprint-5?node-id=90%3A378)
 
 **Deploy**
 
