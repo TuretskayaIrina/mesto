@@ -2,10 +2,11 @@
   display: flex;
   flex-direction: row;
   align-items: baseline;
+  max-width: 336px;
 }
 
 @media screen and (max-width : 1000px) {
   .profile__change {
-
+    max-width: 280px;
   }
 }

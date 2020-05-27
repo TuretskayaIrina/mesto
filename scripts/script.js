@@ -40,7 +40,7 @@ function popupEditSubmitHandler (evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  togglePopup(popup);
+  togglePopup(popupEdite);
 }
 
 //слушатели для попапа - редактирование профиля
@@ -93,18 +93,14 @@ function createCard (item){
   cardElement.querySelector('.elements__img').alt = item.name;
   //название места
   cardElement.querySelector('.elements__name').textContent = item.name;
-
   // поставить лайк
   buttonLike.addEventListener('click', function (evt) {
     evt.target.classList.toggle("elements__like_active");
   });
-
   //удалить
   buttonDelete.addEventListener('click', deleteClickHandler);
-
   //открыть в полном размере
   cardElement.querySelector('.elements__img').addEventListener('click', showPopupPicture);
-
   //добавили в начало массива
   cardContainer.prepend(cardElement);
 }
@@ -122,36 +118,26 @@ function showPopupAdd() {
 function popupAddSubmitHandler (evt) {
   evt.preventDefault();
   togglePopup(popupAdd);
-
-  //почему этот вариант не работет?
-  //createCard(linkInput.value, placeInput.value);
-
-  //шаблон function createCard
   const cardContainer = document.querySelector('.elements');
   const cardTemplate = document.querySelector('.elements-template');
   const cardElement = cardTemplate.content.cloneNode(true);
   const buttonLike  = cardElement.querySelector('.elements__like');
   const buttonDelete = cardElement.querySelector('.elements__delete');
-
   //добавили картинку
   cardElement.querySelector('.elements__img').src = linkInput.value;
   cardElement.querySelector('.elements__img').alt = placeInput.value;
   //название места
   cardElement.querySelector('.elements__name').textContent = placeInput.value;
-
   // поставить лайк
   buttonLike.addEventListener('click', function (evt) {
     evt.target.classList.toggle("elements__like_active");
   });
-
   //удалить
   buttonDelete.addEventListener('click', deleteClickHandler);
   //открыть в полном размере
   cardElement.querySelector('.elements__img').addEventListener('click', showPopupPicture);
-
   //добавили в начало массива
   cardContainer.prepend(cardElement);
-
   formCreateCard.reset();
 }
 
@@ -168,10 +154,10 @@ function deleteClickHandler(evt) {
 }
 
 //открытие попапа - просмотр изображения
-function showPopupPicture() {
-  popupImage.src = document.querySelector('.elements__img').src
-  popupImage.alt = document.querySelector('.elements__img').alt
-  popupCaption.textContent = document.querySelector('.elements__img').alt;
+function showPopupPicture(evt) {
+  popupImage.src = evt.target.src;
+  popupImage.alt = evt.target.alt;
+  popupCaption.textContent = evt.target.alt;
   togglePopup(popupPicture);
 }
 

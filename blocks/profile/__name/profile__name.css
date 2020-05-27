@@ -5,6 +5,9 @@
   margin: 0;
   padding-bottom: 16px;
   word-break: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @media screen and (max-width : 1000px) {
