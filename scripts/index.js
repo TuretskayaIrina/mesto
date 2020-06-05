@@ -26,16 +26,30 @@ const popupCaption = document.querySelector('.popup__caption');
 const cardContainer = document.querySelector('.elements');
 const cardTemplate = document.querySelector('.elements-template');
 
-//открытие - закрытие попапов
-function togglePopup(popup) {
-  popup.classList.toggle('popup_opened');
+//обработчик закрытия на escape
+function keyHandler (evt) {
+  if (evt.key === 'Escape') {
+    document.querySelector('.popup_opened').classList.remove('popup_opened');
+  }
+}
+
+//открытие попапов
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+  document.addEventListener('keydown', keyHandler);
+}
+
+//закрытие попапов
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', keyHandler);
 }
 
 //открытие попапа - редактирование профиля
 function showPopupEdit() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-  togglePopup(popupEdite);
+  openPopup(popupEdite);
 }
 
 //сохранить изменения в профиле
@@ -43,36 +57,8 @@ function popupEditSubmitHandler (evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  togglePopup(popupEdite);
+  closePopup(popupEdite);
 }
-
-//массив дефолтных карточек
-const initialCards = [
-  {
-      name: 'Владивосток',
-      link: 'https://images.unsplash.com/photo-1587637885131-8b08567433d6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80'
-  },
-  {
-      name: 'Санкт-Петербург',
-      link: 'https://images.unsplash.com/photo-1556610961-2fecc5927173?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1220&q=80'
-  },
-  {
-      name: 'Норвегия',
-      link: 'https://images.unsplash.com/photo-1518125790914-39f9ed92cb7e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1211&q=80'
-  },
-  {
-      name: 'Прага',
-      link: 'https://images.unsplash.com/photo-1541849546-216549ae216d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80'
-  },
-  {
-      name: 'Турция',
-      link: 'https://images.unsplash.com/photo-1433838552652-f9a46b332c40?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80'
-  },
-  {
-      name: 'Черногория',
-      link: 'https://images.unsplash.com/photo-1574705357737-3410a1967704?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80'
-  }
-];
 
 //функция для лайков
 function toggleLikeActive(evt) {
@@ -124,13 +110,13 @@ renderInitialCards();
 //открытие попапа - добавления карточки
 function showPopupAdd() {
   formCreateCard.reset();
-  togglePopup(popupAdd);
+  openPopup(popupAdd);
 }
 
 //добавление новых карточек
 function popupAddSubmitHandler (evt) {
   evt.preventDefault();
-  togglePopup(popupAdd);
+  closePopup(popupAdd);
   addCardToContainer(createCard (placeInput.value, linkInput.value));
   formCreateCard.reset();
 }
@@ -140,18 +126,31 @@ function showPopupPicture(evt) {
   popupImage.src = evt.target.src;
   popupImage.alt = evt.target.alt;
   popupCaption.textContent = evt.target.alt;
-  togglePopup(popupPicture);
+  openPopup(popupPicture);
 }
 
 //слушатели для попапа - просмотр изображения
-popupButtonClosePicture.addEventListener('click', () => togglePopup(popupPicture));
+popupButtonClosePicture.addEventListener('click', () => closePopup(popupPicture));
 
 //слушатели для попапа - редактирование профиля
 profileButtonEdit.addEventListener('click', showPopupEdit);
-popupButtonCloseEdite.addEventListener('click', () => togglePopup(popupEdite));
+popupButtonCloseEdite.addEventListener('click', () => closePopup(popupEdite));
 popupEdite.addEventListener('submit', popupEditSubmitHandler);
 
 //слушатели для попапа - добавления карточек
 buttonAdd.addEventListener('click', showPopupAdd);
-popupButtonCloseAdd.addEventListener('click', () => togglePopup(popupAdd));
+popupButtonCloseAdd.addEventListener('click', () => closePopup(popupAdd));
 popupAdd.addEventListener('submit', popupAddSubmitHandler);
+
+
+// включение валидации форм вызовом enableValidation
+// все настройки передаются при вызове
+const formValidationOptions = {
+   formSelector: '.popup__form',//все формы
+   inputSelector: '.popup__input',//все инпуты
+   submitButtonSelector: '.popup__button-save',//все кнопки сабмит
+   inactiveButtonClass: '.popup__button-save_inactive',//стили для неактивных сабмитов (серая кнопка)
+   inputErrorClass: '.popup__input_type-error',//стили для инпута во время ошибки
+   errorClass: '.popup__input-error_visible'// стили для спана во время ошибки
+}
+enableValidation(formValidationOptions);

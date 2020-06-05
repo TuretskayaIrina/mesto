@@ -1,0 +1,19 @@
+.popup__input-error {
+  border: solid 1px red;
+  width: 358px;
+  height: 25px;
+  z-index: 1;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FF0000;
+  display: block;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+@media screen and (max-width : 650px) {
+  .popup__input-error {
+    width: 200px;
+    height: 15px;
+  }
+}
