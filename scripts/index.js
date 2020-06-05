@@ -27,9 +27,16 @@ const cardContainer = document.querySelector('.elements');
 const cardTemplate = document.querySelector('.elements-template');
 
 //обработчик закрытия на escape
-function keyHandler (evt) {
+function keyHandler(evt) {
   if (evt.key === 'Escape') {
     document.querySelector('.popup_opened').classList.remove('popup_opened');
+  }
+}
+
+//обработчик закрытия на оверлей
+function overlayHandler(evt) {
+  if (evt.target.classList.contains('popup')) {
+    evt.target.classList.remove('popup_opened')
   }
 }
 
@@ -141,6 +148,11 @@ popupEdite.addEventListener('submit', popupEditSubmitHandler);
 buttonAdd.addEventListener('click', showPopupAdd);
 popupButtonCloseAdd.addEventListener('click', () => closePopup(popupAdd));
 popupAdd.addEventListener('submit', popupAddSubmitHandler);
+
+//слушатели для закрытия на оверлей
+popupPicture.addEventListener('click', overlayHandler);
+popupEdite.addEventListener('click', overlayHandler);
+popupAdd.addEventListener('click', overlayHandler);
 
 
 // включение валидации форм вызовом enableValidation
