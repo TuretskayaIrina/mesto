@@ -26,8 +26,13 @@ const popupCaption = document.querySelector('.popup__caption');
 const cardContainer = document.querySelector('.elements');
 const cardTemplate = document.querySelector('.elements-template');
 
+const formPopupEdit = popupEdite.querySelector('form');
+const submitPopupEdit = popupEdite.querySelector('.popup__button-save');
 
-// включение валидации форм вызовом enableValidation
+const formPopupAdd = popupAdd.querySelector('form');
+const submitPopupAdd = popupAdd.querySelector('.popup__button-save');
+
+
 // все настройки передаются при вызове
 const formValidationOptions = {
    formSelector: '.popup__form',//все формы
@@ -35,7 +40,7 @@ const formValidationOptions = {
    submitButtonSelector: '.popup__button-save',//все кнопки сабмит
    inactiveButtonClass: 'popup__button-save_inactive',//стили для неактивных сабмитов (серая кнопка)
    inputErrorClass: 'popup__input_type-error',//стили для инпута во время ошибки
-   errorClass: '.popup__input-error_visible'// стили для спана во время ошибки
+   errorClass: 'popup__input-error_visible'// стили для спана во время ошибки
 }
 
 enableValidation(formValidationOptions);
@@ -66,20 +71,14 @@ function closePopup(popup) {
   document.removeEventListener('keydown', keyHandler);
 }
 
-//ищем форму внутри попапа - редактирование профиля
-const formPopupEdit = popupEdite.querySelector('form');
-//ищем сабмит внутри попапа - редактирование профиля
-const submitPopupEdit = popupEdite.querySelector('.popup__button-save');
-
 //открытие попапа - редактирование профиля
 function showPopupEdit() {
-  //надо проверить на валидность при открытии
-  hendelFormInput(formPopupEdit, submitPopupEdit, formValidationOptions.inactiveButtonClass);
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
+  handleFormInput(formPopupEdit, submitPopupEdit, formValidationOptions.inactiveButtonClass);
+  hideInputError (formPopupEdit, jobInput, formValidationOptions);
+  hideInputError (formPopupEdit, nameInput, formValidationOptions);
   openPopup(popupEdite);
-
-
 }
 
 //сохранить изменения в профиле
@@ -137,17 +136,12 @@ function renderInitialCards() {
 
 renderInitialCards();
 
-
-//ищем форму внутри попапа - добавления карточки
-const formPopupAdd = popupAdd.querySelector('form');
-//ищем сабмит внутри попапа - добавления карточки
-const submitPopupAdd = popupAdd.querySelector('.popup__button-save');
-
 //открытие попапа - добавления карточки
 function showPopupAdd() {
   formCreateCard.reset();
-  //проверить на валидность при открытии
-  hendelFormInput(formPopupAdd, submitPopupAdd, formValidationOptions.inactiveButtonClass);
+  handleFormInput(formPopupAdd, submitPopupAdd, formValidationOptions.inactiveButtonClass);
+  hideInputError (formPopupAdd, linkInput, formValidationOptions);
+  hideInputError (formPopupAdd, placeInput, formValidationOptions);
   openPopup(popupAdd);
 }
 
@@ -184,6 +178,3 @@ popupAdd.addEventListener('submit', popupAddSubmitHandler);
 popupPicture.addEventListener('click', overlayHandler);
 popupEdite.addEventListener('click', overlayHandler);
 popupAdd.addEventListener('click', overlayHandler);
-
-
-
