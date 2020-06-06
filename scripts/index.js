@@ -26,6 +26,20 @@ const popupCaption = document.querySelector('.popup__caption');
 const cardContainer = document.querySelector('.elements');
 const cardTemplate = document.querySelector('.elements-template');
 
+
+// включение валидации форм вызовом enableValidation
+// все настройки передаются при вызове
+const formValidationOptions = {
+   formSelector: '.popup__form',//все формы
+   inputSelector: '.popup__input',//все инпуты
+   submitButtonSelector: '.popup__button-save',//все кнопки сабмит
+   inactiveButtonClass: 'popup__button-save_inactive',//стили для неактивных сабмитов (серая кнопка)
+   inputErrorClass: 'popup__input_type-error',//стили для инпута во время ошибки
+   errorClass: '.popup__input-error_visible'// стили для спана во время ошибки
+}
+
+enableValidation(formValidationOptions);
+
 //обработчик закрытия на escape
 function keyHandler(evt) {
   if (evt.key === 'Escape') {
@@ -52,11 +66,20 @@ function closePopup(popup) {
   document.removeEventListener('keydown', keyHandler);
 }
 
+//ищем форму внутри попапа - редактирование профиля
+const formPopupEdit = popupEdite.querySelector('form');
+//ищем сабмит внутри попапа - редактирование профиля
+const submitPopupEdit = popupEdite.querySelector('.popup__button-save');
+
 //открытие попапа - редактирование профиля
 function showPopupEdit() {
+  //надо проверить на валидность при открытии
+  hendelFormInput(formPopupEdit, submitPopupEdit, formValidationOptions.inactiveButtonClass);
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   openPopup(popupEdite);
+
+
 }
 
 //сохранить изменения в профиле
@@ -114,9 +137,17 @@ function renderInitialCards() {
 
 renderInitialCards();
 
+
+//ищем форму внутри попапа - добавления карточки
+const formPopupAdd = popupAdd.querySelector('form');
+//ищем сабмит внутри попапа - добавления карточки
+const submitPopupAdd = popupAdd.querySelector('.popup__button-save');
+
 //открытие попапа - добавления карточки
 function showPopupAdd() {
   formCreateCard.reset();
+  //проверить на валидность при открытии
+  hendelFormInput(formPopupAdd, submitPopupAdd, formValidationOptions.inactiveButtonClass);
   openPopup(popupAdd);
 }
 
@@ -155,14 +186,4 @@ popupEdite.addEventListener('click', overlayHandler);
 popupAdd.addEventListener('click', overlayHandler);
 
 
-// включение валидации форм вызовом enableValidation
-// все настройки передаются при вызове
-// const formValidationOptions = {
-//    formSelector: '.popup__form',//все формы
-//    inputSelector: '.popup__input',//все инпуты
-//    submitButtonSelector: '.popup__button-save',//все кнопки сабмит
-//    inactiveButtonClass: '.popup__button-save_inactive',//стили для неактивных сабмитов (серая кнопка)
-//    inputErrorClass: '.popup__input_type-error',//стили для инпута во время ошибки
-//    errorClass: '.popup__input-error_visible'// стили для спана во время ошибки
-// }
-// enableValidation(formValidationOptions);
+
