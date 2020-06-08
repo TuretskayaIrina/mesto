@@ -1,18 +1,3 @@
- function enableValidation(options) {
-  const formElement = Array.from(document.querySelectorAll(options.formSelector));
-  formElement.forEach(formElement => {
-    const inputElements = Array.from(formElement.querySelectorAll(options.inputSelector));
-    inputElements.forEach(input => {
-      input.addEventListener('input', evt => hendelInput (formElement, input, options))
-    })
-    const submitButton = formElement.querySelector(options.submitButtonSelector);
-    formElement.addEventListener('submit', evt => {
-      evt.preventDefault()
-    })
-    formElement.addEventListener('input', () => handleFormInput(formElement, submitButton, options.inactiveButtonClass))
-  })
-}
-
 //функция вкл/выкл кнопки в зависимости от валидности формы
 function handleFormInput(formElement, submitButton, inactiveButtonClass){
   const hasErrors = !formElement.checkValidity();
@@ -37,10 +22,25 @@ function hideInputError (formElement, inputElement, formValidationOptions) {
 };
 
 // Функция валидации инпутов
-function hendelInput (formElement, inputElement, formValidationOptions) {
+function hendleInput (formElement, inputElement, formValidationOptions) {
   if (!inputElement.validity.valid) {
     showInputError(formElement, inputElement, inputElement.validationMessage, formValidationOptions);
   } else {
     hideInputError(formElement, inputElement, formValidationOptions);
   }
 };
+
+function enableValidation(options) {
+  const formElement = Array.from(document.querySelectorAll(options.formSelector));
+  formElement.forEach(formElement => {
+    const inputElements = Array.from(formElement.querySelectorAll(options.inputSelector));
+    inputElements.forEach(input => {
+      input.addEventListener('input', () => hendleInput (formElement, input, options))
+    })
+    const submitButton = formElement.querySelector(options.submitButtonSelector);
+    formElement.addEventListener('submit', evt => {
+      evt.preventDefault()
+    })
+    formElement.addEventListener('input', () => handleFormInput(formElement, submitButton, options.inactiveButtonClass))
+  })
+}
