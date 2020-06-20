@@ -1,3 +1,7 @@
+import {initialCards} from "./initialСards.js"
+// import  Card from "./Card.js"
+// import  FormValidator from "./FormValidator.js"
+
 
 const profileButtonEdit = document.querySelector('.profile__button-edit');
 const popupButtonCloseEdit = document.querySelector('.popup__edite-close');
@@ -62,6 +66,7 @@ function openPopup(popup) {
   document.addEventListener('keydown', keyHandler);
 }
 
+
 //закрытие попапов
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
@@ -107,31 +112,31 @@ function showPopupPicture(evt) {
 }
 
 //шаблон создания карточек
-function createCard (name, link){
-  //клонировали шаблон
-  const cardElement = cardTemplate.content.cloneNode(true);
-  //добавили лайк
-  const buttonLike  = cardElement.querySelector('.elements__like');
-  //добавили удаление
-  const buttonDelete = cardElement.querySelector('.elements__delete');
-  //добавили картинку
-  const placeImg = cardElement.querySelector('.elements__img');
-  placeImg.src = link;
-  placeImg.alt = name;
-  //название места
-  const placeName = cardElement.querySelector('.elements__name');
-  placeName.textContent = name;
-  // поставить лайк
-  buttonLike.addEventListener('click', toggleLikeActive);
-  //удалить
-  buttonDelete.addEventListener('click', deleteClickHandler);
-  //открыть в полном размере
+// function createCard (name, link){
+//   //клонировали шаблон
+//   const cardElement = cardTemplate.content.cloneNode(true);
+//   //добавили лайк
+//   const buttonLike  = cardElement.querySelector('.elements__like');
+//   //добавили удаление
+//   const buttonDelete = cardElement.querySelector('.elements__delete');
+//   //добавили картинку
+//   const placeImg = cardElement.querySelector('.elements__img');
+//   placeImg.src = link;
+//   placeImg.alt = name;
+//   //название места
+//   const placeName = cardElement.querySelector('.elements__name');
+//   placeName.textContent = name;
+//   // поставить лайк
+//   buttonLike.addEventListener('click', toggleLikeActive);
+//   //удалить
+//   buttonDelete.addEventListener('click', deleteClickHandler);
+//   //открыть в полном размере
 
-  placeImg.addEventListener('click', showPopupPicture);
+//   placeImg.addEventListener('click', showPopupPicture);
 
 
-  return cardElement;
-}
+//   return cardElement;
+// }
 
 //функция добавления карточек
 function addCardToContainer(card){
@@ -140,7 +145,12 @@ function addCardToContainer(card){
 
 // отобразить дефолтные карточки
 function renderInitialCards() {
-  initialCards.forEach(({name, link}) => addCardToContainer(createCard(name, link)));
+  initialCards.forEach((item) => {
+    const card = new Card(item, '.elements-template');
+    cardContainer.prepend(card.generateCard());
+
+    //console.log('working');
+  });
 }
 
 renderInitialCards();

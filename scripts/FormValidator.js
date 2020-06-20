@@ -1,3 +1,7 @@
+// export default class FormValidator {
+
+// }
+
 //функция вкл/выкл кнопки в зависимости от валидности формы
 function handleFormInput(formElement, submitButton, inactiveButtonClass){
   const hasErrors = !formElement.checkValidity();
