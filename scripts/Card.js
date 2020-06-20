@@ -21,14 +21,10 @@ export default class Card {
 
   _likeButtonHandler() {
     this._element.querySelector('.elements__like').classList.toggle('elements__like_active');
-
-    console.log('like');
   }
 
   _deleteButtonHandler() {
     this._element.remove();
-
-    console.log('delete');
   }
 
   _showPopupPicture() {
@@ -41,15 +37,11 @@ export default class Card {
     popupPicture.classList.add('popup_opened');
     document.addEventListener('keydown', this._keyHandler);
     popupPicture.addEventListener('click', this._overlayHandler);
-
-    console.log('открыть в полном размере');
   }
 
   _closePopupPicture() {
     popupPicture.classList.remove('popup_opened');
     document.removeEventListener('keydown', this._keyHandler);
-
-    console.log('close');
   }
 
   _setEventListeners() {
@@ -57,12 +49,10 @@ export default class Card {
     this._element.querySelector('.elements__like').addEventListener('click',() => {
       this._likeButtonHandler();
     });
-
     //удалить
     this._element.querySelector('.elements__delete').addEventListener('click',() => {
       this._deleteButtonHandler();
     });
-
     //открыть в полном размере
     this._element.querySelector('.elements__img').addEventListener('click',() => {
       this._showPopupPicture();
@@ -82,8 +72,6 @@ export default class Card {
     this._element.querySelector('.elements__name').textContent = this._name;
 
     this._setEventListeners();
-
-    console.log('working');
 
     return this._element;
   }
