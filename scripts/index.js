@@ -1,16 +1,16 @@
 import {initialCards} from "./initialСards.js"
-// import  Card from "./Card.js"
+import  Card from "./Card.js"
 // import  FormValidator from "./FormValidator.js"
 
 
 const profileButtonEdit = document.querySelector('.profile__button-edit');
 const popupButtonCloseEdit = document.querySelector('.popup__edite-close');
 const popupButtonCloseAdd = document.querySelector('.popup__add-close');
-const popupButtonClosePicture = document.querySelector('.popup__picture-close');
+//const popupButtonClosePicture = document.querySelector('.popup__picture-close');
 const buttonAdd = document.querySelector('.profile__button-add');
 const popupEdite = document.querySelector('.popup-edite');
 const popupAdd = document.querySelector('.popup-add');
-const popupPicture = document.querySelector('.popup-picture');
+//const popupPicture = document.querySelector('.popup-picture');
 const formCreateCard = popupAdd.querySelector('form');
 
 const nameInput = document.querySelector('.popup__input_name');
@@ -21,11 +21,11 @@ const profileJob = document.querySelector('.profile__profession');
 const placeInput = document.querySelector('.popup__input_place');
 const linkInput = document.querySelector('.popup__input_link');
 
-const popupImage = document.querySelector('.popup__image');
-const popupCaption = document.querySelector('.popup__caption');
+//const popupImage = document.querySelector('.popup__image');
+//const popupCaption = document.querySelector('.popup__caption');
 
 const cardContainer = document.querySelector('.elements');
-const cardTemplate = document.querySelector('.elements-template');
+//const cardTemplate = document.querySelector('.elements-template');
 
 const formPopupEdit = popupEdite.querySelector('form');
 const submitPopupEdit = popupEdite.querySelector('.popup__button-save');
@@ -91,25 +91,25 @@ function popupEditSubmitHandler (evt) {
   closePopup(popupEdite);
 }
 
-//функция для лайков
-function toggleLikeActive(evt) {
-  evt.target.classList.toggle("elements__like_active");
-}
+// //функция для лайков
+// function toggleLikeActive(evt) {
+//   evt.target.classList.toggle("elements__like_active");
+// }
 
-// удаление карточки и слушателей
-function deleteClickHandler(evt) {
-  const cardElement = evt.target.closest('.elements__place');
-  evt.target.removeEventListener('click', deleteClickHandler);
-  cardElement.remove();
-}
+// // удаление карточки и слушателей
+// function deleteClickHandler(evt) {
+//   const cardElement = evt.target.closest('.elements__place');
+//   evt.target.removeEventListener('click', deleteClickHandler);
+//   cardElement.remove();
+// }
 
 //открытие попапа - просмотр изображения
-function showPopupPicture(evt) {
-  popupImage.src = evt.target.src;
-  popupImage.alt = evt.target.alt;
-  popupCaption.textContent = evt.target.alt;
-  openPopup(popupPicture);
-}
+// function showPopupPicture(evt) {
+//   popupImage.src = evt.target.src;
+//   popupImage.alt = evt.target.alt;
+//   popupCaption.textContent = evt.target.alt;
+//   openPopup(popupPicture);
+// }
 
 //шаблон создания карточек
 // function createCard (name, link){
@@ -173,7 +173,7 @@ function popupAddSubmitHandler (evt) {
 }
 
 //слушатели для попапа - просмотр изображения
-popupButtonClosePicture.addEventListener('click', () => closePopup(popupPicture));
+//popupButtonClosePicture.addEventListener('click', () => closePopup(popupPicture));
 
 //слушатели для попапа - редактирование профиля
 profileButtonEdit.addEventListener('click', showPopupEdit);
@@ -186,6 +186,6 @@ popupButtonCloseAdd.addEventListener('click', () => closePopup(popupAdd));
 popupAdd.addEventListener('submit', popupAddSubmitHandler);
 
 //слушатели для закрытия на оверлей
-popupPicture.addEventListener('click', overlayHandler);
+//popupPicture.addEventListener('click', overlayHandler);
 popupEdite.addEventListener('click', overlayHandler);
 popupAdd.addEventListener('click', overlayHandler);

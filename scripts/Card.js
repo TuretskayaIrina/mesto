@@ -1,38 +1,76 @@
-// export default class Card {}
+const popupPicture = document.querySelector('.popup-picture');
 
-class Card {
+export default class Card {
   constructor(data, cardSelector){
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
   }
 
-  _keyHandler() {
-
+  _keyHandler(evt) {
+    if (evt.key === 'Escape') {
+      document.querySelector('.popup_opened').classList.remove('popup_opened');
+    }
   }
 
-  _overlayHandler() {
-
+  _overlayHandler(evt) {
+    if (evt.target.classList.contains('popup')) {
+      evt.target.classList.remove('popup_opened')
+    }
   }
 
   _likeButtonHandler() {
+    this._element.querySelector('.elements__like').classList.toggle('elements__like_active');
 
+    console.log('like');
   }
 
   _deleteButtonHandler() {
+    this._element.remove();
 
+    console.log('delete');
   }
 
   _showPopupPicture() {
+    const popupImage = document.querySelector('.popup__image');
+    const popupCaption = document.querySelector('.popup__caption');
+    popupImage.src = this._link;
+    popupImage.alt = this._name;
+    popupCaption.textContent = this._name;
 
+    popupPicture.classList.add('popup_opened');
+    document.addEventListener('keydown', this._keyHandler);
+    popupPicture.addEventListener('click', this._overlayHandler);
+
+    console.log('открыть в полном размере');
   }
 
   _closePopupPicture() {
+    popupPicture.classList.remove('popup_opened');
+    document.removeEventListener('keydown', this._keyHandler);
 
+    console.log('close');
   }
 
   _setEventListeners() {
+    // поставить лайк
+    this._element.querySelector('.elements__like').addEventListener('click',() => {
+      this._likeButtonHandler();
+    });
 
+    //удалить
+    this._element.querySelector('.elements__delete').addEventListener('click',() => {
+      this._deleteButtonHandler();
+    });
+
+    //открыть в полном размере
+    this._element.querySelector('.elements__img').addEventListener('click',() => {
+      this._showPopupPicture();
+    });
+    //закрыть
+    document.querySelector('.popup__picture-close').addEventListener('click',() => {
+      this._closePopupPicture();
+    });
   }
 
   generateCard() {
@@ -43,8 +81,11 @@ class Card {
     placeImg.alt = this._name;
     this._element.querySelector('.elements__name').textContent = this._name;
 
+    this._setEventListeners();
+
     console.log('working');
 
     return this._element;
   }
 }
+
