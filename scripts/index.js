@@ -30,7 +30,6 @@ const submitPopupAdd = popupAdd.querySelector('.popup__button-save');
 
 // все настройки передаются при вызове
 const formValidationOptions = {
-   formSelector: '.popup__form',//все формы
    inputSelector: '.popup__input',//все инпуты
    submitButtonSelector: '.popup__button-save',//все кнопки сабмит
    inactiveButtonClass: 'popup__button-save_inactive',//стили для неактивных сабмитов (серая кнопка)
@@ -38,7 +37,11 @@ const formValidationOptions = {
    errorClass: 'popup__input-error_visible'// стили для спана во время ошибки
 }
 
-enableValidation(formValidationOptions);
+const validationPopupEdit = new FormValidator(formPopupEdit, formValidationOptions);
+validationPopupEdit.enableValidation();
+
+const validationPopupAdd = new FormValidator(formPopupAdd, formValidationOptions);
+validationPopupAdd.enableValidation();
 
 //обработчик закрытия на escape
 function keyHandler(evt) {
@@ -66,13 +69,19 @@ function closePopup(popup) {
   document.removeEventListener('keydown', keyHandler);
 }
 
+
 //открытие попапа - редактирование профиля
 function showPopupEdit() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-  handleFormInput(formPopupEdit, submitPopupEdit, formValidationOptions.inactiveButtonClass);
-  hideInputError (formPopupEdit, jobInput, formValidationOptions);
-  hideInputError (formPopupEdit, nameInput, formValidationOptions);
+
+
+  validationPopupEdit.handleFormInput();
+
+  // handleFormInput(formPopupEdit, submitPopupEdit, formValidationOptions.inactiveButtonClass);
+  // hideInputError (formPopupEdit, jobInput, formValidationOptions);
+  // hideInputError (formPopupEdit, nameInput, formValidationOptions);
+
   openPopup(popupEdite);
 }
 
@@ -97,9 +106,14 @@ renderInitialCards();
 //открытие попапа - добавления карточки
 function showPopupAdd() {
   formCreateCard.reset();
-  handleFormInput(formPopupAdd, submitPopupAdd, formValidationOptions.inactiveButtonClass);
-  hideInputError (formPopupAdd, linkInput, formValidationOptions);
-  hideInputError (formPopupAdd, placeInput, formValidationOptions);
+
+  validationPopupAdd.handleFormInput();
+
+  // handleFormInput(formPopupAdd, submitPopupAdd, formValidationOptions.inactiveButtonClass);
+  // hideInputError (formPopupAdd, linkInput, formValidationOptions);
+  // hideInputError (formPopupAdd, placeInput, formValidationOptions);
+
+
   openPopup(popupAdd);
 }
 
