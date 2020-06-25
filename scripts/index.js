@@ -1,6 +1,6 @@
 import {initialCards} from "./initialСards.js"
 import  Card from "./Card.js"
-// import  FormValidator from "./FormValidator.js"
+import  FormValidator from "./FormValidator.js"
 
 
 const profileButtonEdit = document.querySelector('.profile__button-edit');
@@ -22,21 +22,17 @@ const linkInput = document.querySelector('.popup__input_link');
 const cardContainer = document.querySelector('.elements');
 
 const formPopupEdit = popupEdite.querySelector('form');
-const submitPopupEdit = popupEdite.querySelector('.popup__button-save');
 
 const formPopupAdd = popupAdd.querySelector('form');
-const submitPopupAdd = popupAdd.querySelector('.popup__button-save');
 
-
-// все настройки передаются при вызове
+// объект настроек с селекторами и классами формы
 const formValidationOptions = {
-   inputSelector: '.popup__input',//все инпуты
-   submitButtonSelector: '.popup__button-save',//все кнопки сабмит
-   inactiveButtonClass: 'popup__button-save_inactive',//стили для неактивных сабмитов (серая кнопка)
-   inputErrorClass: 'popup__input_type-error',//стили для инпута во время ошибки
-   errorClass: 'popup__input-error_visible',// стили для спана во время ошибки
-
-   errorSpans: '.popup__input-error'// спаны
+  inputSelector: '.popup__input',//все инпуты
+  submitButtonSelector: '.popup__button-save',//все кнопки сабмит
+  inactiveButtonClass: 'popup__button-save_inactive',//стили для неактивных сабмитов (серая кнопка)
+  inputErrorClass: 'popup__input_type-error',//стили для инпута во время ошибки
+  errorClass: 'popup__input-error_visible',// стили для спана во время ошибки
+  errorSpans: '.popup__input-error'// спаны
 }
 
 const validationPopupEdit = new FormValidator(formPopupEdit, formValidationOptions);
@@ -76,10 +72,7 @@ function closePopup(popup) {
 function showPopupEdit() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-
-  validationPopupEdit._handleFormInput();
-  validationPopupEdit._hideInputError();
-
+  validationPopupEdit.resetFormaValidation();
   openPopup(popupEdite);
 }
 
@@ -104,10 +97,7 @@ renderInitialCards();
 //открытие попапа - добавления карточки
 function showPopupAdd() {
   formCreateCard.reset();
-
-  validationPopupAdd._handleFormInput();
-  validationPopupAdd._hideInputError();
-
+  validationPopupAdd.resetFormaValidation();
   openPopup(popupAdd);
 }
 
