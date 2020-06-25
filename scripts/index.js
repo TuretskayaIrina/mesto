@@ -34,7 +34,9 @@ const formValidationOptions = {
    submitButtonSelector: '.popup__button-save',//все кнопки сабмит
    inactiveButtonClass: 'popup__button-save_inactive',//стили для неактивных сабмитов (серая кнопка)
    inputErrorClass: 'popup__input_type-error',//стили для инпута во время ошибки
-   errorClass: 'popup__input-error_visible'// стили для спана во время ошибки
+   errorClass: 'popup__input-error_visible',// стили для спана во время ошибки
+
+   errorSpans: '.popup__input-error'// спаны
 }
 
 const validationPopupEdit = new FormValidator(formPopupEdit, formValidationOptions);
@@ -75,12 +77,8 @@ function showPopupEdit() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 
-
-  validationPopupEdit.handleFormInput();
-
-  // handleFormInput(formPopupEdit, submitPopupEdit, formValidationOptions.inactiveButtonClass);
-  // hideInputError (formPopupEdit, jobInput, formValidationOptions);
-  // hideInputError (formPopupEdit, nameInput, formValidationOptions);
+  validationPopupEdit._handleFormInput();
+  validationPopupEdit._hideInputError();
 
   openPopup(popupEdite);
 }
@@ -107,12 +105,8 @@ renderInitialCards();
 function showPopupAdd() {
   formCreateCard.reset();
 
-  validationPopupAdd.handleFormInput();
-
-  // handleFormInput(formPopupAdd, submitPopupAdd, formValidationOptions.inactiveButtonClass);
-  // hideInputError (formPopupAdd, linkInput, formValidationOptions);
-  // hideInputError (formPopupAdd, placeInput, formValidationOptions);
-
+  validationPopupAdd._handleFormInput();
+  validationPopupAdd._hideInputError();
 
   openPopup(popupAdd);
 }
