@@ -1,4 +1,6 @@
 const popupPicture = document.querySelector('.popup-picture');
+const popupImage = document.querySelector('.popup__image');
+const popupCaption = document.querySelector('.popup__caption');
 
 export default class Card {
   constructor(data, cardSelector){
@@ -7,29 +9,32 @@ export default class Card {
     this._cardSelector = cardSelector;
   }
 
+  // закрыть на Escape
   _keyHandler(evt) {
     if (evt.key === 'Escape') {
       document.querySelector('.popup_opened').classList.remove('popup_opened');
     }
   }
 
+  // закрыть на overlay
   _overlayHandler(evt) {
     if (evt.target.classList.contains('popup')) {
       evt.target.classList.remove('popup_opened')
     }
   }
 
+  // поставить like
   _likeButtonHandler() {
     this._element.querySelector('.elements__like').classList.toggle('elements__like_active');
   }
 
+  // удалить карточку
   _deleteButtonHandler() {
     this._element.remove();
   }
 
+  // открыть PopupPicture
   _showPopupPicture() {
-    const popupImage = document.querySelector('.popup__image');
-    const popupCaption = document.querySelector('.popup__caption');
     popupImage.src = this._link;
     popupImage.alt = this._name;
     popupCaption.textContent = this._name;
@@ -39,11 +44,13 @@ export default class Card {
     popupPicture.addEventListener('click', this._overlayHandler);
   }
 
+  // закрыть PopupPicture
   _closePopupPicture() {
     popupPicture.classList.remove('popup_opened');
     document.removeEventListener('keydown', this._keyHandler);
   }
 
+  //слушатели
   _setEventListeners() {
     // поставить лайк
     this._element.querySelector('.elements__like').addEventListener('click',() => {
@@ -63,6 +70,7 @@ export default class Card {
     });
   }
 
+  // сгенерировать карточку
   generateCard() {
     this._element = document.querySelector(this._cardSelector).content.querySelector('.elements__place').cloneNode(true);
 

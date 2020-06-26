@@ -22,8 +22,8 @@ const linkInput = document.querySelector('.popup__input_link');
 const cardContainer = document.querySelector('.elements');
 
 const formPopupEdit = popupEdite.querySelector('form');
-
 const formPopupAdd = popupAdd.querySelector('form');
+
 
 // объект настроек с селекторами и классами формы
 const formValidationOptions = {
@@ -43,8 +43,11 @@ validationPopupAdd.enableValidation();
 
 //обработчик закрытия на escape
 function keyHandler(evt) {
+  const popupOpened = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
-    document.querySelector('.popup_opened').classList.remove('popup_opened');
+    if (popupOpened) {
+    closePopup(popupOpened);
+    }
   }
 }
 

@@ -33,7 +33,7 @@ export default class FormValidator {
   }
 
   // валидация инпутов
-  _hendleInput (inputElement) {
+  _handleInput (inputElement) {
     const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement, inputElement.validationMessage, errorElement);
@@ -45,7 +45,7 @@ export default class FormValidator {
   // слушатели
   _setEventListeners() {
     this._inputs.forEach((inputs) => {
-      inputs.addEventListener('input', () => this._hendleInput(inputs))
+      inputs.addEventListener('input', () => this._handleInput(inputs))
     });
     this._formElement.addEventListener('input', () => this._handleFormInput());
   }
