@@ -1,6 +1,7 @@
 import {initialCards} from "./initialСards.js"
-import  Card from "./Card.js"
-import  FormValidator from "./FormValidator.js"
+import Card from "./Card.js"
+import FormValidator from "./FormValidator.js"
+import Section from "./Section.js"
 
 
 const profileButtonEdit = document.querySelector('.profile__button-edit');
@@ -88,14 +89,30 @@ function popupEditSubmitHandler (evt) {
 }
 
 // отобразить дефолтные карточки
-function renderInitialCards() {
-  initialCards.forEach((item) => {
-    const card = new Card(item, '.elements-template');
-    cardContainer.prepend(card.generateCard());
-  });
+function renderInitialCards(item) {
+  const card = new Card(item, '.elements-template');
+  defoltCards.addItem(card.generateCard());
+  // console.log(defoltCards);
+
+  // initialCards.forEach((item) => {
+  //   const card = new Card(item, '.elements-template');
+  //   cardContainer.prepend(card.generateCard());
+  // });
 }
 
-renderInitialCards();
+// renderInitialCards();
+
+const defoltCards = new Section({
+  items: initialCards,
+  renderer: ((item) => {
+    renderInitialCards(item);
+    // console.log('working');
+  })
+}, '.elements');
+
+// console.log(defoltCards);
+
+defoltCards.renderItems();
 
 //открытие попапа - добавления карточки
 function showPopupAdd() {
