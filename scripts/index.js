@@ -2,6 +2,7 @@ import {initialCards} from "./initialСards.js"
 import Card from "./Card.js"
 import FormValidator from "./FormValidator.js"
 import Section from "./Section.js"
+import UserInfo from './UserInfo.js';
 
 
 const profileButtonEdit = document.querySelector('.profile__button-edit');
