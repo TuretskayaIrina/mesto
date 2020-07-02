@@ -2,6 +2,8 @@ import {initialCards} from "./initialСards.js"
 import Card from "./Card.js"
 import FormValidator from "./FormValidator.js"
 import Section from "./Section.js"
+import PopupWithImage from "./PopupWithImage.js"
+import PopupWithForm from "./PopupWithForm.js"
 import UserInfo from './UserInfo.js';
 
 
@@ -89,9 +91,16 @@ function popupEditSubmitHandler (evt) {
   closePopup(popupEdite);
 }
 
+const popupWithImage = new PopupWithImage('.popup-picture');
+
 // отобразить дефолтные карточки
 function renderInitialCards(item) {
-  const card = new Card(item, '.elements-template');
+  const card = new Card(item, '.elements-template', {
+    handleCardClick: () => {
+      console.log('handleCardClick defolt csrd working')
+      // popupWithImage.open(item.name, item.link);
+    }
+  });
   defoltCards.addItem(card.generateCard());
   // console.log(defoltCards);
 
@@ -115,6 +124,22 @@ const defoltCards = new Section({
 
 defoltCards.renderItems();
 
+
+const addPopup = new PopupWithForm('.popup-add', {
+  handleFormSubmit: (item) => {
+    console.log('handleCardClick addPopup working');
+
+    // userInfo.setUserInfo(item);
+  }
+});
+
+const editePopup = new PopupWithForm('.popup-edite', {
+  handleFormSubmit: () => {
+    console.log('handleCardClick editePopup working');
+
+  }
+});
+
 //открытие попапа - добавления карточки
 function showPopupAdd() {
   formCreateCard.reset();
@@ -129,14 +154,24 @@ function popupAddSubmitHandler (evt) {
   const newCard = {};
   newCard.name = placeInput.value;
   newCard.link = linkInput.value;
-  const card = new Card(newCard, '.elements-template');
+  const card = new Card(newCard, '.elements-template', {
+    handleCardClick: () => {
+      console.log('handleCardClick new Card working')
+    }
+  });
   cardContainer.prepend(card.generateCard());
   formCreateCard.reset();
 }
 
 //слушатели для попапа - редактирование профиля
-profileButtonEdit.addEventListener('click', showPopupEdit);
-popupButtonCloseEdit.addEventListener('click', () => closePopup(popupEdite));
+
+// profileButtonEdit.addEventListener('click', showPopupEdit);
+// popupButtonCloseEdit.addEventListener('click', () => closePopup(popupEdite));
+
+profileButtonEdit.addEventListener('click', () => {
+  editePopup.open();
+})
+
 popupEdite.addEventListener('submit', popupEditSubmitHandler);
 
 //слушатели для попапа - добавления карточек
