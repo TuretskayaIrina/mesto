@@ -8,13 +8,10 @@ export default class PopupWithForm extends Popup {
 
   _getInputValues() {
     this._inputs = this._popupSelector.querySelectorAll('.popup__input');
-    // console.log(this._inputs);
     this._dataInputs = {};
     this._inputs.forEach(input => {
       this._dataInputs[input.name] = input.value;
     });
-
-    console.log(this._dataInputs);
     return this._dataInputs;
   }
 
@@ -35,12 +32,3 @@ export default class PopupWithForm extends Popup {
     this._popupSelector.querySelector('.popup__form').reset();
   }
 }
-
-
-//сохранить изменения в профиле
-// function popupEditSubmitHandler (evt) {
-//   evt.preventDefault();
-//   profileName.textContent = nameInput.value;
-//   profileJob.textContent = jobInput.value;
-//   closePopup(popupEdite);
-// }

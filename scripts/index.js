@@ -110,7 +110,6 @@ const defoltCards = new Section({
   items: initialCards,
   renderer: ((item) => {
     renderInitialCards(item);
-    // console.log('working');
   })
 }, '.elements');
 
@@ -122,8 +121,9 @@ popupWithImage.setEventListeners();
 const addPopup = new PopupWithForm(popupAdd, {
   handleFormSubmit: (item) => {
     console.log('handleFormSubmit addPopup working');
-
-
+    console.log(item);
+    const newItem = {name: item.placeInput, link: item.linkInput};
+    renderInitialCards(newItem);
   }
 });
 
