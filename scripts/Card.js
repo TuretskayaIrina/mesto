@@ -8,7 +8,7 @@ export default class Card {
     this._link = data.link;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
-    console.log(handleCardClick);
+    // console.log(handleCardClick);
   }
 
   // закрыть на Escape
@@ -64,8 +64,10 @@ export default class Card {
     });
 
     //Эта функция должна открывать попап с картинкой при клике на карточку.
-    this._element.querySelector('.elements__img').addEventListener('click',() => {
+    this._element.querySelector('.elements__img').addEventListener('click', () => {
       this._handleCardClick(this._name, this._link);
+      // console.log(this._name);
+      // console.log(this._link);
     });
 
     // //открыть в полном размере

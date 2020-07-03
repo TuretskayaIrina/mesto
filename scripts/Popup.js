@@ -19,7 +19,8 @@ export default class Popup {
   }
 
   open() {
-    // this._popupSelector.classList.add('popup_opened');
+    this._popupSelector.classList.add('popup_opened');
+    console.log(this._popupSelector);
     document.addEventListener('keydown', this._handleEscClose);
     document.addEventListener('click', this._handleOverlayClose);
 
@@ -35,9 +36,18 @@ export default class Popup {
   }
 
   setEventListeners() {
-    this._popupSelector.querySelector('.popup__button-close').addEventListener('click', () => {
+    console.log('закрыть на крестик работает');
+    console.log(this._popupSelector);
+
+    this._closeButton = this._popupSelector.querySelector('.popup__button-close');
+    console.log(this._closeButton);
+
+    this._closeButton.addEventListener('click', () => {
+      console.log('закрыть на крестик работает');
       this.close();
     });
+
+    console.log(this._popupSelector.querySelector('.popup__button-close'));
   }
 }
 

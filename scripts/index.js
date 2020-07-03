@@ -55,24 +55,25 @@ function keyHandler(evt) {
   }
 }
 
-//обработчик закрытия на оверлей
-function overlayHandler(evt) {
-  if (evt.target.classList.contains('popup')) {
-    evt.target.classList.remove('popup_opened')
-  }
-}
+// //обработчик закрытия на оверлей
+// function overlayHandler(evt) {
+//   if (evt.target.classList.contains('popup')) {
+//     evt.target.classList.remove('popup_opened')
+//   }
+// }
 
-//открытие попапов
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', keyHandler);
-}
+// //открытие попапов
+// function openPopup(popup) {
+//   popup.classList.add('popup_opened');
+//   document.addEventListener('keydown', keyHandler);
+// }
 
-//закрытие попапов
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', keyHandler);
-}
+// //закрытие попапов
+// function closePopup(popup) {
+//   popup.classList.remove('popup_opened');
+//   document.removeEventListener('keydown', keyHandler);
+// }
+
 
 
 //открытие попапа - редактирование профиля
@@ -91,17 +92,20 @@ function popupEditSubmitHandler (evt) {
   closePopup(popupEdite);
 }
 
-const popupWithImage = new PopupWithImage('.popup-picture');
+const popupPicture = document.querySelector('.popup-picture');
+const popupWithImage = new PopupWithImage(popupPicture);
 
 // отобразить дефолтные карточки
 function renderInitialCards(item) {
   const card = new Card(item, '.elements-template', {
     handleCardClick: () => {
-      console.log('handleCardClick defolt csrd working')
-      // popupWithImage.open(item.name, item.link);
+      // console.log('handleCardClick defolt csrd working')
+      popupWithImage.open(item.name, item.link);
     }
   });
   defoltCards.addItem(card.generateCard());
+
+
   // console.log(defoltCards);
 
   // initialCards.forEach((item) => {
@@ -123,11 +127,12 @@ const defoltCards = new Section({
 // console.log(defoltCards);
 
 defoltCards.renderItems();
+popupWithImage.setEventListeners();
 
 
 const addPopup = new PopupWithForm('.popup-add', {
   handleFormSubmit: (item) => {
-    console.log('handleCardClick addPopup working');
+    console.log('handleFormSubmit addPopup working');
 
     // userInfo.setUserInfo(item);
   }
@@ -135,7 +140,7 @@ const addPopup = new PopupWithForm('.popup-add', {
 
 const editePopup = new PopupWithForm('.popup-edite', {
   handleFormSubmit: () => {
-    console.log('handleCardClick editePopup working');
+    console.log('handleFormSubmit editePopup working');
 
   }
 });
@@ -180,5 +185,5 @@ popupButtonCloseAdd.addEventListener('click', () => closePopup(popupAdd));
 popupAdd.addEventListener('submit', popupAddSubmitHandler);
 
 //слушатели для закрытия на оверлей
-popupEdite.addEventListener('click', overlayHandler);
-popupAdd.addEventListener('click', overlayHandler);
+// popupEdite.addEventListener('click', overlayHandler);
+// popupAdd.addEventListener('click', overlayHandler);
