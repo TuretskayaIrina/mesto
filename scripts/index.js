@@ -46,14 +46,14 @@ const validationPopupAdd = new FormValidator(formPopupAdd, formValidationOptions
 validationPopupAdd.enableValidation();
 
 //обработчик закрытия на escape
-function keyHandler(evt) {
-  const popupOpened = document.querySelector('.popup_opened');
-  if (evt.key === 'Escape') {
-    if (popupOpened) {
-    closePopup(popupOpened);
-    }
-  }
-}
+// function keyHandler(evt) {
+//   const popupOpened = document.querySelector('.popup_opened');
+//   if (evt.key === 'Escape') {
+//     if (popupOpened) {
+//     closePopup(popupOpened);
+//     }
+//   }
+// }
 
 // //обработчик закрытия на оверлей
 // function overlayHandler(evt) {
@@ -77,20 +77,20 @@ function keyHandler(evt) {
 
 
 //открытие попапа - редактирование профиля
-function showPopupEdit() {
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
-  validationPopupEdit.resetFormaValidation();
-  openPopup(popupEdite);
-}
+// function showPopupEdit() {
+//   nameInput.value = profileName.textContent;
+//   jobInput.value = profileJob.textContent;
+//   validationPopupEdit.resetFormaValidation();
+//   openPopup(popupEdite);
+// }
 
-//сохранить изменения в профиле
-function popupEditSubmitHandler (evt) {
-  evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-  closePopup(popupEdite);
-}
+// //сохранить изменения в профиле
+// function popupEditSubmitHandler (evt) {
+//   evt.preventDefault();
+//   profileName.textContent = nameInput.value;
+//   profileJob.textContent = jobInput.value;
+//   closePopup(popupEdite);
+// }
 
 const popupPicture = document.querySelector('.popup-picture');
 const popupWithImage = new PopupWithImage(popupPicture);
@@ -104,17 +104,7 @@ function renderInitialCards(item) {
     }
   });
   defoltCards.addItem(card.generateCard());
-
-
-  // console.log(defoltCards);
-
-  // initialCards.forEach((item) => {
-  //   const card = new Card(item, '.elements-template');
-  //   cardContainer.prepend(card.generateCard());
-  // });
 }
-
-// renderInitialCards();
 
 const defoltCards = new Section({
   items: initialCards,
@@ -124,33 +114,42 @@ const defoltCards = new Section({
   })
 }, '.elements');
 
-// console.log(defoltCards);
 
 defoltCards.renderItems();
 popupWithImage.setEventListeners();
 
 
-const addPopup = new PopupWithForm('.popup-add', {
+const addPopup = new PopupWithForm(popupAdd, {
   handleFormSubmit: (item) => {
     console.log('handleFormSubmit addPopup working');
 
-    // userInfo.setUserInfo(item);
+
   }
 });
 
-const editePopup = new PopupWithForm('.popup-edite', {
+const userInfo = new UserInfo({
+  profileName: profileName,
+  profileJob: profileJob
+})
+
+console.log(userInfo);
+
+const editePopup = new PopupWithForm(popupEdite, {
   handleFormSubmit: () => {
     console.log('handleFormSubmit editePopup working');
-
+    userInfo.setUserInfo(item);
   }
 });
 
+addPopup.setEventListeners();
+editePopup.setEventListeners();
+
 //открытие попапа - добавления карточки
-function showPopupAdd() {
-  formCreateCard.reset();
-  validationPopupAdd.resetFormaValidation();
-  openPopup(popupAdd);
-}
+// function showPopupAdd() {
+//   formCreateCard.reset();
+//   validationPopupAdd.resetFormaValidation();
+//   openPopup(popupAdd);
+// }
 
 //добавление новых карточек
 function popupAddSubmitHandler (evt) {
@@ -174,16 +173,30 @@ function popupAddSubmitHandler (evt) {
 // popupButtonCloseEdit.addEventListener('click', () => closePopup(popupEdite));
 
 profileButtonEdit.addEventListener('click', () => {
+  const profileInfo  = userInfo.getUserInfo();
+
+  console.log(profileInfo);
+  nameInput.value = profileInfo.name;
+  jobInput.value = profileInfo.job;
+  // nameInput.value = profileName.textContent;
+  // jobInput.value = profileJob.textContent;
+  validationPopupEdit.resetFormaValidation();
   editePopup.open();
 })
 
-popupEdite.addEventListener('submit', popupEditSubmitHandler);
+// popupEdite.addEventListener('submit', popupEditSubmitHandler);
 
 //слушатели для попапа - добавления карточек
-buttonAdd.addEventListener('click', showPopupAdd);
-popupButtonCloseAdd.addEventListener('click', () => closePopup(popupAdd));
-popupAdd.addEventListener('submit', popupAddSubmitHandler);
+
+buttonAdd.addEventListener('click', () => {
+  addPopup.open();
+})
+
+// buttonAdd.addEventListener('click', showPopupAdd);
+// popupButtonCloseAdd.addEventListener('click', () => closePopup(popupAdd));
+// popupAdd.addEventListener('submit', popupAddSubmitHandler);
 
 //слушатели для закрытия на оверлей
 // popupEdite.addEventListener('click', overlayHandler);
 // popupAdd.addEventListener('click', overlayHandler);
+//
