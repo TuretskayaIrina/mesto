@@ -4,7 +4,7 @@ import FormValidator from "./FormValidator.js"
 import Section from "./Section.js"
 import PopupWithImage from "./PopupWithImage.js"
 import PopupWithForm from "./PopupWithForm.js"
-import UserInfo from './UserInfo.js';
+import UserInfo from './UserInfo.js'
 
 
 const profileButtonEdit = document.querySelector('.profile__button-edit');
@@ -132,11 +132,8 @@ const userInfo = new UserInfo({
   profileJob: profileJob
 })
 
-console.log(userInfo);
-
 const editePopup = new PopupWithForm(popupEdite, {
-  handleFormSubmit: () => {
-    console.log('handleFormSubmit editePopup working');
+  handleFormSubmit: (item) => {
     userInfo.setUserInfo(item);
   }
 });
@@ -173,13 +170,9 @@ function popupAddSubmitHandler (evt) {
 // popupButtonCloseEdit.addEventListener('click', () => closePopup(popupEdite));
 
 profileButtonEdit.addEventListener('click', () => {
-  const profileInfo  = userInfo.getUserInfo();
-
-  console.log(profileInfo);
+  const profileInfo = userInfo.getUserInfo();
   nameInput.value = profileInfo.name;
   jobInput.value = profileInfo.job;
-  // nameInput.value = profileName.textContent;
-  // jobInput.value = profileJob.textContent;
   validationPopupEdit.resetFormaValidation();
   editePopup.open();
 })
@@ -189,6 +182,8 @@ profileButtonEdit.addEventListener('click', () => {
 //слушатели для попапа - добавления карточек
 
 buttonAdd.addEventListener('click', () => {
+  formCreateCard.reset();
+  validationPopupAdd.resetFormaValidation();
   addPopup.open();
 })
 
