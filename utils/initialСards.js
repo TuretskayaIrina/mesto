@@ -1,5 +1,3 @@
-
-
 //массив дефолтных карточек
 export const initialCards = [
   {
