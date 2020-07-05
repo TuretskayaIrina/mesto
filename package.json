@@ -17,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/TuretskayaIrina/mesto/issues"
   },
-  "homepage": "https://github.com/TuretskayaIrina/mesto#readme",
+  "homepage": "https://turetskayairina.github.io/mesto/",
   "devDependencies": {
     "@babel/core": "^7.10.4",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
