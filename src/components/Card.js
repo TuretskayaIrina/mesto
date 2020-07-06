@@ -8,21 +8,6 @@ export default class Card {
     this._link = data.link;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
-    // console.log(handleCardClick);
-  }
-
-  // закрыть на Escape
-  _keyHandler(evt) {
-    if (evt.key === 'Escape') {
-      document.querySelector('.popup_opened').classList.remove('popup_opened');
-    }
-  }
-
-  // закрыть на overlay
-  _overlayHandler(evt) {
-    if (evt.target.classList.contains('popup')) {
-      evt.target.classList.remove('popup_opened')
-    }
   }
 
   // поставить like
@@ -34,23 +19,6 @@ export default class Card {
   _deleteButtonHandler() {
     this._element.remove();
   }
-
-  // // открыть PopupPicture
-  // _showPopupPicture() {
-  //   popupImage.src = this._link;
-  //   popupImage.alt = this._name;
-  //   popupCaption.textContent = this._name;
-
-  //   popupPicture.classList.add('popup_opened');
-  //   document.addEventListener('keydown', this._keyHandler);
-  //   popupPicture.addEventListener('click', this._overlayHandler);
-  // }
-
-  // // закрыть PopupPicture
-  // _closePopupPicture() {
-  //   popupPicture.classList.remove('popup_opened');
-  //   document.removeEventListener('keydown', this._keyHandler);
-  // }
 
   //слушатели
   _setEventListeners() {
@@ -66,18 +34,7 @@ export default class Card {
     //Эта функция должна открывать попап с картинкой при клике на карточку.
     this._element.querySelector('.elements__img').addEventListener('click', () => {
       this._handleCardClick(this._name, this._link);
-      // console.log(this._name);
-      // console.log(this._link);
     });
-
-    // //открыть в полном размере
-    // this._element.querySelector('.elements__img').addEventListener('click',() => {
-    //   this._showPopupPicture();
-    // });
-    // //закрыть
-    // document.querySelector('.popup__picture-close').addEventListener('click',() => {
-    //   this._closePopupPicture();
-    // });
   }
 
   // сгенерировать карточку
