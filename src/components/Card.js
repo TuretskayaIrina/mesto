@@ -4,9 +4,9 @@ const popupCaption = document.querySelector('.popup__caption');
 
 export default class Card {
   constructor(data, cardSelector, { handleCardClick }){
-    this._name = data.name;
-    this._link = data.link;
+    this._data = data;
     this._cardSelector = cardSelector;
+    // this._api = api;
     this._handleCardClick = handleCardClick;
   }
 
@@ -33,7 +33,7 @@ export default class Card {
 
     //Эта функция должна открывать попап с картинкой при клике на карточку.
     this._element.querySelector('.elements__img').addEventListener('click', () => {
-      this._handleCardClick(this._name, this._link);
+      this._handleCardClick(this._data.name, this._data.link);
     });
   }
 
@@ -42,13 +42,14 @@ export default class Card {
     this._element = document.querySelector(this._cardSelector).content.querySelector('.elements__place').cloneNode(true);
 
     const placeImg = this._element.querySelector('.elements__img');
-    placeImg.src = this._link;
-    placeImg.alt = this._name;
-    this._element.querySelector('.elements__name').textContent = this._name;
+    placeImg.src = this._data.link;
+    placeImg.alt = this._data.name;
+    this._element.querySelector('.elements__name').textContent = this._data.name;
 
     this._setEventListeners();
 
     return this._element;
+
   }
 }
 

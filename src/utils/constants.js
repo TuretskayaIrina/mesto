@@ -14,6 +14,7 @@ export const jobInput = document.querySelector('.popup__input_profession');
 
 export const profileName = document.querySelector('.profile__name');
 export const profileJob = document.querySelector('.profile__profession');
+export const profileAvatar = document.querySelector('.profile__img');
 
 // объект настроек с селекторами и классами формы
 export const formValidationOptions = {
