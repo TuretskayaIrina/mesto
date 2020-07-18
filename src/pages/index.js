@@ -20,7 +20,7 @@ import {
   nameInput,
   jobInput,
   profileName,
-  profileJob,
+  profileAbout,
   profileAvatar,
   formValidationOptions
 } from "../utils/constants.js"
@@ -46,7 +46,7 @@ const config = {
 }
 
 const api = new Api(config);
-// api.getUserInfo();
+
 
 // function renderInitialCards(item) {
 //   const card = new Card(item, '.elements-template', api, {
@@ -70,22 +70,15 @@ api.getInitialCards()
             popupWithImage.open(item.name, item.link);
           }
         });
-
-        // сломалось
         defoltCards.addItem(card.generateCard());
       }
     }, '.elements');
-
-    console.log(defoltCards);
     defoltCards.renderItems();
-
   });
-
 
 const addPopup = new PopupWithForm(popupAdd, {
   handleFormSubmit: (item) => {
     const newItem = {name: item.placeInput, link: item.linkInput};
-
     //тут надо починить
     renderInitialCards(newItem);
   }
@@ -94,24 +87,34 @@ const addPopup = new PopupWithForm(popupAdd, {
 addPopup.setEventListeners();
 
 const userInfo = new UserInfo({
-  api: api,
-  profileName: profileName,
-  profileJob: profileJob,
-  profileAvatar: profileAvatar
+  name: profileName,
+  about: profileAbout,
+  avatar: profileAvatar
 })
 
+// получили данные о пользоателе с сервера
+api.getUserInfo()
+  .then((res) => {
+    userInfo.setUserInfo(res);
+  });
+
+// отправить изменения профиля на сервер
 const editePopup = new PopupWithForm(popupEdite, {
-  handleFormSubmit: (item) => {
-    userInfo.setUserInfo(item);
+  handleFormSubmit: () => {
+    const inputValue = editePopup.getInputValues();
+    api.setUserInfo(inputValue)
+      .then((data) => {
+        userInfo.setUserInfo(data);
+      })
   }
-});
+})
 
 editePopup.setEventListeners();
 
 profileButtonEdit.addEventListener('click', () => {
   const profileInfo = userInfo.getUserInfo();
   nameInput.value = profileInfo.name;
-  jobInput.value = profileInfo.job;
+  jobInput.value = profileInfo.about;
   validationPopupEdit.resetFormaValidation();
   editePopup.open();
 })

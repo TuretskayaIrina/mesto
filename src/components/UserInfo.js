@@ -1,20 +1,21 @@
 export default class UserInfo {
-  constructor({api, profileName, profileJob, profileAvatar }) {
-    this.api = api;
-    this._profileName = profileName;
-    this._profileJob = profileJob;
-    this._profileAvatar = profileAvatar;
+  constructor(profile) {
+    this._profileName = profile.name;
+    this._profileAbout = profile.about;
+    this._profileAvatar = profile.avatar;
   }
 
   getUserInfo() {
     return {
       name: this._profileName.textContent,
-      job: this._profileJob.textContent
+      about: this._profileAbout.textContent,
+      avatar: this._profileAvatar
     }
   }
 
   setUserInfo(data) {
-    this._profileName.textContent = data.nameInput;
-    this._profileJob.textContent = data.jobInput;
+    this._profileName.textContent = data.name;
+    this._profileAbout.textContent = data.about;
+    // this._profileAvatar.src = data.avatar;
   }
 }
