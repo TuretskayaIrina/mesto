@@ -1,6 +1,7 @@
 export const popupEdite = document.querySelector('.popup-edite');
 export const popupAdd = document.querySelector('.popup-add');
 export const popupPicture = document.querySelector('.popup-picture');
+export const popupDelite = document.querySelector('.popup-delite');
 
 export const formCreateCard = popupAdd.querySelector('form');
 export const formPopupEdit = popupEdite.querySelector('form');

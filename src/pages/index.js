@@ -5,6 +5,8 @@ import FormValidator from "../components/FormValidator.js"
 import Section from "../components/Section.js"
 import PopupWithImage from "../components/PopupWithImage.js"
 import PopupWithForm from "../components/PopupWithForm.js"
+import PopupWithDelite from "../components/PopupWithDelite.js"
+import PopupAvatar from "../components/PopupAvatar.js"
 import UserInfo from '../components/UserInfo.js'
 import Api from '../components/Api.js'
 
@@ -12,6 +14,7 @@ import {
   popupEdite,
   popupAdd,
   popupPicture,
+  popupDelite,
   formCreateCard,
   formPopupEdit,
   formPopupAdd,
@@ -37,6 +40,13 @@ const popupWithImage = new PopupWithImage(popupPicture);
 
 popupWithImage.setEventListeners();
 
+// тут еще валидацию прикрутить нужно
+const popupWithDelite = new PopupWithDelite(popupDelite);
+popupWithDelite.deleteButtonHandler();
+
+// тут еще валидацию прикрутить нужно
+// const popupAvatar = new PopupAvatar();
+
 const config = {
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-13',
   headers: {
@@ -50,7 +60,7 @@ const api = new Api(config);
 // получить карточки с сервера
 const defoltCards = new Section({
   renderer: (item) => {
-    const card = new Card(item, '.elements-template', {
+    const card = new Card(api, item, '.elements-template', {
       handleCardClick: () => {
         popupWithImage.open(item.name, item.link);
       }
@@ -63,6 +73,7 @@ const defoltCards = new Section({
 api.getInitialCards()
   .then((res) => {
     defoltCards.renderItems(res);
+    console.log(res);
   });
 
 // отправить новую карточку на сервер
@@ -71,7 +82,7 @@ const addPopup = new PopupWithForm(popupAdd, {
     const inputValue = addPopup.getInputValues();
     api.setCard(inputValue)
       .then((data) => {
-        const card = new Card(data, '.elements-template', {
+        const card = new Card(api, data, '.elements-template', {
           handleCardClick: () => {
             popupWithImage.open(item.name, item.link);
           }
