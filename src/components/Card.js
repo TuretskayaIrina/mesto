@@ -7,6 +7,7 @@ export default class Card {
     this._api = api;
     this._data = data;
     this._id = data._id;
+    this._owner = data.owner;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
   }
@@ -66,6 +67,12 @@ export default class Card {
     this._element.querySelector('.elements__like-counter').textContent = `${this._data.likes.length}`;
     if (this._data.likes.find((like) => like._id === "a5b819b34cd334f4803b5b5c")) {
       this._element.querySelector('.elements__like').classList.add('elements__like_active');
+    }
+
+    if (this._owner._id === "a5b819b34cd334f4803b5b5c") {
+      this._element.querySelector('.elements__delete').style.display = 'block';
+    } else {
+      this._element.querySelector('.elements__delete').style.display = 'none';
     }
 
     this._setEventListeners();

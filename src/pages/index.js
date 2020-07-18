@@ -39,9 +39,9 @@ validationPopupAdd.enableValidation();
 const validationPopupAvatar = new FormValidator(formPopupAvatar, formValidationOptions);
 validationPopupAvatar.enableValidation();
 
-// тут еще валидацию прикрутить нужно
 const popupWithDelite = new PopupWithDelite(popupDelite);
-popupWithDelite.deleteButtonHandler();
+popupWithDelite.setEventListeners();
+
 
 const popupWithImage = new PopupWithImage(popupPicture);
 popupWithImage.setEventListeners();

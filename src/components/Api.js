@@ -118,4 +118,17 @@ export default class Api {
       .then(this._handleResponse)
       .catch(this._handleResponseError)
   }
+
+  // удалить карточку
+  deliteCard(id) {
+    return fetch(
+      `${this.baseUrl}/cards/${id}`,
+      {
+        method: 'DELETE',
+        headers: this.headers
+      }
+    )
+      .then(this._handleResponse)
+      .catch(this._handleResponseError)
+  }
 }
