@@ -47,6 +47,23 @@ export default class Api {
       .catch(this._handleResponseError)
   }
 
+  // изменить аватарку
+  changeAvatar(avatar) {
+    return fetch(
+      `${this.baseUrl}/users/me/avatar`,
+      {
+        method: 'PATCH',
+        headers: this.headers,
+        body: JSON.stringify({
+          avatar: avatar.linkInput
+        })
+      }
+    )
+      .then(this._handleResponse)
+      .catch(this._handleResponseError)
+  }
+
+
   // получить дефолтные карточки
   getInitialCards() {
     return fetch(

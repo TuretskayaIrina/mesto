@@ -6,7 +6,6 @@ import Section from "../components/Section.js"
 import PopupWithImage from "../components/PopupWithImage.js"
 import PopupWithForm from "../components/PopupWithForm.js"
 import PopupWithDelite from "../components/PopupWithDelite.js"
-import PopupAvatar from "../components/PopupAvatar.js"
 import UserInfo from '../components/UserInfo.js'
 import Api from '../components/Api.js'
 
@@ -15,11 +14,14 @@ import {
   popupAdd,
   popupPicture,
   popupDelite,
+  popupAvatar,
   formCreateCard,
   formPopupEdit,
   formPopupAdd,
+  formPopupAvatar,
   profileButtonEdit,
   buttonAdd,
+  profilePenEdite,
   nameInput,
   jobInput,
   profileName,
@@ -29,23 +31,21 @@ import {
 } from "../utils/constants.js"
 
 const validationPopupEdit = new FormValidator(formPopupEdit, formValidationOptions);
-
 validationPopupEdit.enableValidation();
 
 const validationPopupAdd = new FormValidator(formPopupAdd, formValidationOptions);
-
 validationPopupAdd.enableValidation();
 
-const popupWithImage = new PopupWithImage(popupPicture);
-
-popupWithImage.setEventListeners();
+const validationPopupAvatar = new FormValidator(formPopupAvatar, formValidationOptions);
+validationPopupAvatar.enableValidation();
 
 // тут еще валидацию прикрутить нужно
 const popupWithDelite = new PopupWithDelite(popupDelite);
 popupWithDelite.deleteButtonHandler();
 
-// тут еще валидацию прикрутить нужно
-// const popupAvatar = new PopupAvatar();
+const popupWithImage = new PopupWithImage(popupPicture);
+popupWithImage.setEventListeners();
+
 
 const config = {
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-13',
@@ -105,6 +105,7 @@ const userInfo = new UserInfo({
 api.getUserInfo()
   .then((res) => {
     userInfo.setUserInfo(res);
+    console.log(res);
   });
 
 // отправить изменения профиля на сервер
@@ -119,6 +120,29 @@ const editePopup = new PopupWithForm(popupEdite, {
 })
 
 editePopup.setEventListeners();
+
+// попап изменения профиля
+const avatarPopup = new PopupWithForm(popupAvatar, {
+  handleFormSubmit: () => {
+    const inputValue = avatarPopup.getInputValues();
+    console.log(inputValue);
+    api.changeAvatar(inputValue)
+      .then((data) => {
+        console.log(data);
+        userInfo.setUserAvatar(data);
+      })
+    console.log('handleFormSubmit avatar working')
+  }
+})
+
+// слушатели для попапа профиля
+avatarPopup.setEventListeners();
+
+// открыть попап изменения профиля
+profilePenEdite.addEventListener('click', () => {
+  validationPopupAvatar.resetFormaValidation();
+  avatarPopup.open();
+})
 
 profileButtonEdit.addEventListener('click', () => {
   const profileInfo = userInfo.getUserInfo();

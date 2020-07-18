@@ -2,13 +2,16 @@ export const popupEdite = document.querySelector('.popup-edite');
 export const popupAdd = document.querySelector('.popup-add');
 export const popupPicture = document.querySelector('.popup-picture');
 export const popupDelite = document.querySelector('.popup-delite');
+export const popupAvatar = document.querySelector('.popup-avatar');
 
 export const formCreateCard = popupAdd.querySelector('form');
 export const formPopupEdit = popupEdite.querySelector('form');
 export const formPopupAdd = popupAdd.querySelector('form');
+export const formPopupAvatar = popupAvatar.querySelector('form');
 
 export const profileButtonEdit = document.querySelector('.profile__button-edit');
 export const buttonAdd = document.querySelector('.profile__button-add');
+export const profilePenEdite = document.querySelector('.profile__pen-edite');
 
 export const nameInput = document.querySelector('.popup__input_name');
 export const jobInput = document.querySelector('.popup__input_profession');
