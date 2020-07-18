@@ -18,7 +18,7 @@ export default class Api {
     return Promise.reject(err.message)
   }
 
-  // получить дефолтные карточки
+  // получить данные профиля
   getUserInfo() {
     return fetch(
       `${this.baseUrl}/users/me`,
@@ -30,7 +30,24 @@ export default class Api {
       .catch(this._handleResponseError)
   }
 
-  //получить данные профиля
+  // отправить данные профиля
+  setUserInfo(profile) {
+    return fetch(
+      `${this.baseUrl}/users/me`,
+      {
+        method: 'PATCH',
+        headers: this.headers,
+        body: JSON.stringify({
+          name: profile.nameInput,
+          about: profile.jobInput
+        })
+      }
+    )
+      .then(this._handleResponse)
+      .catch(this._handleResponseError)
+  }
+
+  // получить дефолтные карточки
   getInitialCards() {
     return fetch(
       `${this.baseUrl}/cards`,
@@ -42,16 +59,16 @@ export default class Api {
       .catch(this._handleResponseError)
   }
 
-  //отправить данные профиля
-  setUserInfo(profile) {
+  // отправить карточку на сервер
+  setCard(card) {
     return fetch(
-      `${this.baseUrl}/users/me`,
+      `${this.baseUrl}/cards`,
       {
-        method: 'PATCH',
+        method: 'POST',
         headers: this.headers,
         body: JSON.stringify({
-          name: profile.nameInput,
-          about: profile.jobInput
+          name: card.placeInput,
+          link: card.linkInput
         })
       }
     )

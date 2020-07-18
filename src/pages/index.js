@@ -47,45 +47,43 @@ const config = {
 
 const api = new Api(config);
 
+// получить карточки с сервера
+const defoltCards = new Section({
+  renderer: (item) => {
+    const card = new Card(item, '.elements-template', {
+      handleCardClick: () => {
+        popupWithImage.open(item.name, item.link);
+      }
+    });
+    defoltCards.addItem(card.generateCard());
+  }
+}, '.elements');
 
-// function renderInitialCards(item) {
-//   const card = new Card(item, '.elements-template', api, {
-//     handleCardClick: () => {
-//       popupWithImage.open(item.name, item.link);
-//     }
-//   });
-
-//   // сломалось
-//   // defoltCards.addItem(card.generateCard());
-//   console.log('renderInitialCards working');
-// }
-
+// отрендерить карточки
 api.getInitialCards()
   .then((res) => {
-    const defoltCards = new Section({
-      items: res,
-      renderer: (item) => {
-        const card = new Card(item, '.elements-template', {
+    defoltCards.renderItems(res);
+  });
+
+// отправить новую карточку на сервер
+const addPopup = new PopupWithForm(popupAdd, {
+  handleFormSubmit: (item) => {
+    const inputValue = addPopup.getInputValues();
+    api.setCard(inputValue)
+      .then((data) => {
+        const card = new Card(data, '.elements-template', {
           handleCardClick: () => {
             popupWithImage.open(item.name, item.link);
           }
         });
         defoltCards.addItem(card.generateCard());
-      }
-    }, '.elements');
-    defoltCards.renderItems();
-  });
-
-const addPopup = new PopupWithForm(popupAdd, {
-  handleFormSubmit: (item) => {
-    const newItem = {name: item.placeInput, link: item.linkInput};
-    //тут надо починить
-    renderInitialCards(newItem);
+      })
   }
 });
 
 addPopup.setEventListeners();
 
+// конструктор пользователя
 const userInfo = new UserInfo({
   name: profileName,
   about: profileAbout,
