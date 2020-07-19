@@ -120,7 +120,7 @@ export default class Api {
   }
 
   // удалить карточку
-  deliteCard(id) {
+  deleteCard(id) {
     return fetch(
       `${this.baseUrl}/cards/${id}`,
       {

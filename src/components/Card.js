@@ -3,13 +3,15 @@ const popupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
 
 export default class Card {
-  constructor(api, data, cardSelector, { handleCardClick }){
+  constructor(api, userInfo, data, cardSelector, { handleCardClick, handleCardDelete }){
     this._api = api;
+    this._userInfo = userInfo;
     this._data = data;
     this._id = data._id;
     this._owner = data.owner;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._handleCardDelete = handleCardDelete;
   }
 
   // показать счетчик лайков
@@ -34,9 +36,9 @@ export default class Card {
   }
 
   // удалить карточку
-  _deleteButtonHandler() {
-    this._element.remove();
-  }
+  // _deleteButtonHandler() {
+  //   this._element.remove();
+  // }
 
   //слушатели
   _setEventListeners() {
@@ -46,14 +48,28 @@ export default class Card {
     });
 
     // удалить карточку
+    // this._element.querySelector('.elements__delete').addEventListener('click',() => {
+    //   this._deleteButtonHandler();
+    // });
+
     this._element.querySelector('.elements__delete').addEventListener('click',() => {
-      this._deleteButtonHandler();
+      this._handleCardDelete(this._element);
     });
 
     // открыть картинку в полном размере
     this._element.querySelector('.elements__img').addEventListener('click', () => {
       this._handleCardClick(this._data.name, this._data.link);
     });
+  }
+
+
+  // вот это нужно применить в блокировке мусорок и лайках
+  getUserId() {
+    this._api.getUserInfo()
+      .then((data) => {
+        data._id;
+        console.log(data._id);
+      })
   }
 
   // сгенерировать карточку
@@ -65,11 +81,12 @@ export default class Card {
     this._element.querySelector('.elements__name').textContent = this._data.name;
     this._element.id = this._id;
     this._element.querySelector('.elements__like-counter').textContent = `${this._data.likes.length}`;
+
     if (this._data.likes.find((like) => like._id === "a5b819b34cd334f4803b5b5c")) {
       this._element.querySelector('.elements__like').classList.add('elements__like_active');
     }
 
-    if (this._owner._id === "a5b819b34cd334f4803b5b5c") {
+    if (this._data.owner._id === "a5b819b34cd334f4803b5b5c") {
       this._element.querySelector('.elements__delete').style.display = 'block';
     } else {
       this._element.querySelector('.elements__delete').style.display = 'none';

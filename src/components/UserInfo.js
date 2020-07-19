@@ -1,9 +1,18 @@
 export default class UserInfo {
-  constructor(profile) {
-    this._profileName = profile.name;
-    this._profileAbout = profile.about;
-    this._profileAvatar = profile.avatar;
+  constructor({api, profileName, profileAbout, profileAvatar}) {
+    this._api = api;
+    this._profileName = profileName;
+    this._profileAbout = profileAbout;
+    this._profileAvatar = profileAvatar;
   }
+
+  // getUserId() {
+  //   this._api.getUserInfo()
+  //     .then((data) => {
+  //       data._id;
+  //       console.log(data._id);
+  //     })
+  // }
 
   getUserInfo() {
     return {

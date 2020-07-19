@@ -39,9 +39,8 @@ validationPopupAdd.enableValidation();
 const validationPopupAvatar = new FormValidator(formPopupAvatar, formValidationOptions);
 validationPopupAvatar.enableValidation();
 
-const popupWithDelite = new PopupWithDelite(popupDelite);
+const popupWithDelite = new PopupWithDelite(popupDelite)
 popupWithDelite.setEventListeners();
-
 
 const popupWithImage = new PopupWithImage(popupPicture);
 popupWithImage.setEventListeners();
@@ -60,12 +59,17 @@ const api = new Api(config);
 // получить карточки с сервера
 const defoltCards = new Section({
   renderer: (item) => {
-    const card = new Card(api, item, '.elements-template', {
+    const card = new Card(api, userInfo, item, '.elements-template', {
       handleCardClick: () => {
         popupWithImage.open(item.name, item.link);
+      },
+      handleCardDelete: () => {
+        popupWithDelite.open();
       }
     });
     defoltCards.addItem(card.generateCard());
+
+    card.getUserId();
   }
 }, '.elements');
 
@@ -82,9 +86,12 @@ const addPopup = new PopupWithForm(popupAdd, {
     const inputValue = addPopup.getInputValues();
     api.setCard(inputValue)
       .then((data) => {
-        const card = new Card(api, data, '.elements-template', {
+        const card = new Card(api, userInfo, data, '.elements-template', {
           handleCardClick: () => {
             popupWithImage.open(item.name, item.link);
+          },
+          handleCardDelete: () => {
+            popupWithDelite.open();
           }
         });
         defoltCards.addItem(card.generateCard());
@@ -96,10 +103,16 @@ addPopup.setEventListeners();
 
 // конструктор пользователя
 const userInfo = new UserInfo({
-  name: profileName,
-  about: profileAbout,
-  avatar: profileAvatar
+  api: api,
+  profileName: profileName,
+  profileAbout: profileAbout,
+  profileAvatar: profileAvatar
 })
+
+// console.log(userInfo);
+
+// userInfo.getUserId();
+
 
 // получили данные о пользоателе с сервера
 api.getUserInfo()
