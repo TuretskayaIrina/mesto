@@ -35,10 +35,10 @@ export default class Card {
     }
   }
 
-  // удалить карточку
-  // _deleteButtonHandler() {
-  //   this._element.remove();
-  // }
+  // удалить карточку из DOM
+  deleteCard() {
+    this._element.remove();
+  }
 
   //слушатели
   _setEventListeners() {
@@ -46,11 +46,6 @@ export default class Card {
     this._element.querySelector('.elements__like').addEventListener('click',() => {
       this._showLikeCounter();
     });
-
-    // удалить карточку
-    // this._element.querySelector('.elements__delete').addEventListener('click',() => {
-    //   this._deleteButtonHandler();
-    // });
 
     this._element.querySelector('.elements__delete').addEventListener('click',() => {
       this._handleCardDelete(this._element);
@@ -64,13 +59,13 @@ export default class Card {
 
 
   // вот это нужно применить в блокировке мусорок и лайках
-  getUserId() {
-    this._api.getUserInfo()
-      .then((data) => {
-        data._id;
-        console.log(data._id);
-      })
-  }
+  // getUserId() {
+  //   this._api.getUserInfo()
+  //     .then((data) => {
+  //       data._id;
+  //       console.log(data._id);
+  //     })
+  // }
 
   // сгенерировать карточку
   generateCard() {

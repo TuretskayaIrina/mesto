@@ -65,11 +65,13 @@ const defoltCards = new Section({
       },
       handleCardDelete: () => {
         popupWithDelite.open();
+        popupWithDelite.setHandleSubmit(function(){
+          api.deleteCard(card._id);
+          card.deleteCard();
+        });
       }
     });
     defoltCards.addItem(card.generateCard());
-
-    card.getUserId();
   }
 }, '.elements');
 
@@ -92,6 +94,11 @@ const addPopup = new PopupWithForm(popupAdd, {
           },
           handleCardDelete: () => {
             popupWithDelite.open();
+            popupWithDelite.setHandleSubmit(function(){
+              console.log('working');
+              api.deleteCard(card._id);
+              card.deleteCard();
+            });
           }
         });
         defoltCards.addItem(card.generateCard());
@@ -108,11 +115,6 @@ const userInfo = new UserInfo({
   profileAbout: profileAbout,
   profileAvatar: profileAvatar
 })
-
-// console.log(userInfo);
-
-// userInfo.getUserId();
-
 
 // получили данные о пользоателе с сервера
 api.getUserInfo()
@@ -170,3 +172,5 @@ buttonAdd.addEventListener('click', () => {
   validationPopupAdd.resetFormaValidation();
   addPopup.open();
 })
+
+
