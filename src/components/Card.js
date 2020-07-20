@@ -57,16 +57,6 @@ export default class Card {
     });
   }
 
-
-  // вот это нужно применить в блокировке мусорок и лайках
-  getUserId() {
-    this._api.getUserInfo()
-      .then((data) => {
-        data._id;
-        console.log(data._id);
-      })
-  }
-
   // сгенерировать карточку
   generateCard() {
     this._element = document.querySelector(this._cardSelector).content.querySelector('.elements__place').cloneNode(true);
@@ -77,15 +67,15 @@ export default class Card {
     this._element.id = this._id;
     this._element.querySelector('.elements__like-counter').textContent = `${this._data.likes.length}`;
 
-    if (this._data.likes.find((like) => like._id === "a5b819b34cd334f4803b5b5c")) {
+    if (this._data.likes.find((like) => like._id === this._api.myId)) {
       this._element.querySelector('.elements__like').classList.add('elements__like_active');
-    }
+    };
 
-    if (this._data.owner._id === "a5b819b34cd334f4803b5b5c") {
+    if (this._data.owner._id === this._api.myId) {
       this._element.querySelector('.elements__delete').style.display = 'block';
     } else {
       this._element.querySelector('.elements__delete').style.display = 'none';
-    }
+    };
 
     this._setEventListeners();
 

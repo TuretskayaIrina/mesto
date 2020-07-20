@@ -21,4 +21,10 @@ export default class PopupWithDelite extends Popup {
     });
     super.setEventListeners();
   }
+
+  // открыть
+  open() {
+    super.open();
+    this.handleLoading('Да');
+  }
 }

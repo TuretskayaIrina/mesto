@@ -26,7 +26,8 @@ import {
   profileName,
   profileAbout,
   profileAvatar,
-  formValidationOptions
+  formValidationOptions,
+  config
 } from "../utils/constants.js"
 
 const validationPopupEdit = new FormValidator(formPopupEdit, formValidationOptions);
@@ -44,18 +45,7 @@ popupWithDelite.setEventListeners();
 const popupWithImage = new PopupWithImage(popupPicture);
 popupWithImage.setEventListeners();
 
-
-const config = {
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-13',
-  headers: {
-    authorization: '9420ae04-aee0-4c02-9434-ecee21317d2d',
-    'Content-Type': 'application/json'
-  }
-}
-
 const api = new Api(config);
-
-
 
 // получить карточки с сервера
 const defoltCards = new Section({
@@ -73,7 +63,6 @@ const defoltCards = new Section({
       }
     });
     defoltCards.addItem(card.generateCard());
-    card.getUserId();
   }
 }, '.elements');
 
@@ -97,11 +86,11 @@ const addPopup = new PopupWithForm(popupAdd, {
             popupWithDelite.open();
             popupWithDelite.setHandleSubmit(function(){
               api.deleteCard(card._id);
+              card.deleteCard();
             });
           }
         });
         defoltCards.addItem(card.generateCard());
-        card.getUserId();
       })
   }
 });
@@ -142,10 +131,8 @@ const avatarPopup = new PopupWithForm(popupAvatar, {
     console.log(inputValue);
     api.changeAvatar(inputValue)
       .then((data) => {
-        console.log(data);
         userInfo.setUserAvatar(data);
       })
-    console.log('handleFormSubmit avatar working')
   }
 })
 
