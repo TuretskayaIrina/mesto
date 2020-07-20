@@ -47,22 +47,44 @@ popupWithImage.setEventListeners();
 
 const api = new Api(config);
 
+const myId = api.myId;
+
+// создать карточку
+function handleCard(item) {
+  const card = new Card( myId, item, '.elements-template', {
+    handleCardClick: () => {
+      popupWithImage.open(item.name, item.link);
+
+    },
+    handleCardDelete: () => {
+      popupWithDelite.open();
+      popupWithDelite.setHandleSubmit(function(){
+        api.deleteCard(card._id);
+        card.deleteCard();
+      });
+    },
+    handleAddlike: () => {
+      api.setLike(item._id)
+        .then((item) => {
+          card.showLikeCounter(item.likes);
+          card.addLike();
+        })
+    },
+    handleDeletelike: () => {
+      api.deleteLike(item._id)
+        .then((item) => {
+          card.showLikeCounter(item.likes);
+          card.addLike();
+        })
+    }
+  });
+  defoltCards.addItem(card.generateCard());
+}
+
 // получить карточки с сервера
 const defoltCards = new Section({
   renderer: (item) => {
-    const card = new Card(api, userInfo, item, '.elements-template', {
-      handleCardClick: () => {
-        popupWithImage.open(item.name, item.link);
-      },
-      handleCardDelete: () => {
-        popupWithDelite.open();
-        popupWithDelite.setHandleSubmit(function(){
-          api.deleteCard(card._id);
-          card.deleteCard();
-        });
-      }
-    });
-    defoltCards.addItem(card.generateCard());
+    handleCard(item);
   }
 }, '.elements');
 
@@ -74,23 +96,11 @@ api.getInitialCards()
 
 // отправить новую карточку на сервер
 const addPopup = new PopupWithForm(popupAdd, {
-  handleFormSubmit: (item) => {
+  handleFormSubmit: () => {
     const inputValue = addPopup.getInputValues();
     api.setCard(inputValue)
-      .then((data) => {
-        const card = new Card(api, userInfo, data, '.elements-template', {
-          handleCardClick: () => {
-            popupWithImage.open(item.name, item.link);
-          },
-          handleCardDelete: () => {
-            popupWithDelite.open();
-            popupWithDelite.setHandleSubmit(function(){
-              api.deleteCard(card._id);
-              card.deleteCard();
-            });
-          }
-        });
-        defoltCards.addItem(card.generateCard());
+      .then((item) => {
+        handleCard(item);
       })
   }
 });
@@ -109,6 +119,7 @@ const userInfo = new UserInfo({
 api.getUserInfo()
   .then((res) => {
     userInfo.setUserInfo(res);
+    // console.log(res._id);
   });
 
 // отправить изменения профиля на сервер

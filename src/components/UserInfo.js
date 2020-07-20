@@ -1,19 +1,11 @@
 export default class UserInfo {
-  constructor({api, profileName, profileAbout, profileAvatar}) {
-    this._api = api;
+  constructor({ profileName, profileAbout, profileAvatar }) {
     this._profileName = profileName;
     this._profileAbout = profileAbout;
     this._profileAvatar = profileAvatar;
   }
 
-  // getUserId() {
-  //   this._api.getUserInfo()
-  //     .then((data) => {
-  //       data._id;
-  //       console.log(data._id);
-  //     })
-  // }
-
+  // получить данные пользователя
   getUserInfo() {
     return {
       name: this._profileName.textContent,
@@ -22,12 +14,14 @@ export default class UserInfo {
     }
   }
 
+  // установить данные пользователя
   setUserInfo(data) {
     this._profileName.textContent = data.name;
     this._profileAbout.textContent = data.about;
     this._profileAvatar.src = data.avatar;
   }
 
+  // установить аватар
   setUserAvatar(data) {
     this._profileAvatar.src = data.avatar;
   }

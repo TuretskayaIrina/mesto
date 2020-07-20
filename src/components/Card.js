@@ -3,36 +3,35 @@ const popupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
 
 export default class Card {
-  constructor(api, userInfo, data, cardSelector, { handleCardClick, handleCardDelete }){
-    this._api = api;
-    this._userInfo = userInfo;
+  constructor( myId, data, cardSelector, { handleCardClick, handleCardDelete,  handleAddlike, handleDeletelike }){
+    this._myId = myId;
     this._data = data;
+    this._like = data.likes;
     this._id = data._id;
     this._owner = data.owner;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._handleCardDelete = handleCardDelete;
+    this._handleAddlike = handleAddlike;
+    this._handleDeletelike = handleDeletelike;
+  }
+
+  // поставить лайк
+  addLike() {
+    const like = this._element.querySelector('.elements__like');
+    like.classList.toggle('elements__like_active');
   }
 
   // показать счетчик лайков
-  _showLikeCounter() {
-    const like = this._element.querySelector('.elements__like');
+  showLikeCounter(arr) {
     const likeCounter = this._element.querySelector('.elements__like-counter');
+    likeCounter.textContent = arr.length;
+  }
 
-    if (!like.classList.contains('elements__like_active')) {
-      this._api.setLike(this._id)
-        .then((data) => {
-          like.classList.add('elements__like_active');
-          likeCounter.textContent = `${data.likes.length}`;
-
-        })
-    } else {
-      this._api.deleteLike(this._id)
-        .then((data) => {
-          like.classList.remove('elements__like_active');
-          likeCounter.textContent = `${data.likes.length}`;
-        })
-    }
+  // показать лайки
+  _showLike() {
+    const like = this._element.querySelector('.elements__like');
+    !like.classList.contains('elements__like_active') ? this._handleAddlike() : this._handleDeletelike();
   }
 
   // удалить карточку из DOM
@@ -44,7 +43,7 @@ export default class Card {
   _setEventListeners() {
     // поставить лайк
     this._element.querySelector('.elements__like').addEventListener('click',() => {
-      this._showLikeCounter();
+      this._showLike();
     });
 
     this._element.querySelector('.elements__delete').addEventListener('click',() => {
@@ -67,11 +66,11 @@ export default class Card {
     this._element.id = this._id;
     this._element.querySelector('.elements__like-counter').textContent = `${this._data.likes.length}`;
 
-    if (this._data.likes.find((like) => like._id === this._api.myId)) {
+    if (this._data.likes.find((like) => like._id === this._myId)) {
       this._element.querySelector('.elements__like').classList.add('elements__like_active');
     };
 
-    if (this._data.owner._id === this._api.myId) {
+    if (this._data.owner._id === this._myId) {
       this._element.querySelector('.elements__delete').style.display = 'block';
     } else {
       this._element.querySelector('.elements__delete').style.display = 'none';
