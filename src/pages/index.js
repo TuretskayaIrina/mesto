@@ -1,5 +1,4 @@
 import "./index.css"
-import {initialCards} from "../utils/initialСards.js"
 import Card from "../components/Card.js"
 import FormValidator from "../components/FormValidator.js"
 import Section from "../components/Section.js"
@@ -56,6 +55,8 @@ const config = {
 
 const api = new Api(config);
 
+
+
 // получить карточки с сервера
 const defoltCards = new Section({
   renderer: (item) => {
@@ -72,6 +73,7 @@ const defoltCards = new Section({
       }
     });
     defoltCards.addItem(card.generateCard());
+    card.getUserId();
   }
 }, '.elements');
 
@@ -79,7 +81,6 @@ const defoltCards = new Section({
 api.getInitialCards()
   .then((res) => {
     defoltCards.renderItems(res);
-    console.log(res);
   });
 
 // отправить новую карточку на сервер
@@ -95,13 +96,12 @@ const addPopup = new PopupWithForm(popupAdd, {
           handleCardDelete: () => {
             popupWithDelite.open();
             popupWithDelite.setHandleSubmit(function(){
-              console.log('working');
               api.deleteCard(card._id);
-              card.deleteCard();
             });
           }
         });
         defoltCards.addItem(card.generateCard());
+        card.getUserId();
       })
   }
 });
@@ -120,7 +120,6 @@ const userInfo = new UserInfo({
 api.getUserInfo()
   .then((res) => {
     userInfo.setUserInfo(res);
-    console.log(res);
   });
 
 // отправить изменения профиля на сервер
@@ -159,6 +158,7 @@ profilePenEdite.addEventListener('click', () => {
   avatarPopup.open();
 })
 
+// слушатели кнопки изменить профиль
 profileButtonEdit.addEventListener('click', () => {
   const profileInfo = userInfo.getUserInfo();
   nameInput.value = profileInfo.name;
@@ -167,10 +167,9 @@ profileButtonEdit.addEventListener('click', () => {
   editePopup.open();
 })
 
+// слушатели кнопки добавить карточку
 buttonAdd.addEventListener('click', () => {
   formCreateCard.reset();
   validationPopupAdd.resetFormaValidation();
   addPopup.open();
 })
-
-

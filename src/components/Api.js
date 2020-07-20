@@ -4,17 +4,19 @@ export default class Api {
     this.headers = headers;
   }
 
+  // проверка ответа сервера
   _handleResponse(response){
     if (response.ok) {
       return response.json();
     } else {
-      console.log('_handleResponse rejection')
+      console.log('Rejection')
       return Promise.reject(response.statusText)
     }
   }
 
+  // обработка ошибки
   _handleResponseError(err){
-    console.log('_handleResponseError')
+    console.log('Error')
     return Promise.reject(err.message)
   }
 

@@ -59,13 +59,13 @@ export default class Card {
 
 
   // вот это нужно применить в блокировке мусорок и лайках
-  // getUserId() {
-  //   this._api.getUserInfo()
-  //     .then((data) => {
-  //       data._id;
-  //       console.log(data._id);
-  //     })
-  // }
+  getUserId() {
+    this._api.getUserInfo()
+      .then((data) => {
+        data._id;
+        console.log(data._id);
+      })
+  }
 
   // сгенерировать карточку
   generateCard() {
