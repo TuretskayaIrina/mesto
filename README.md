@@ -40,7 +40,7 @@ ___
 
 * [Первая часть макета в Figma](https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4?node-id=80%3A76)
 * [Вторая часть макета в Figma](https://www.figma.com/file/nlYpT4VhFiwimn2YlncrcF/JavaScript.-Sprint-5?node-id=90%3A378)
-* [Третья часть макета в Figma] (https://www.figma.com/file/hhhIavVTeuilfPPZ6sbifl/JavaScript.-Sprint-9?node-id=4002%3A309)
+* [Третья часть макета в Figma](https://www.figma.com/file/hhhIavVTeuilfPPZ6sbifl/JavaScript.-Sprint-9?node-id=4002%3A309)
 
 **Deploy**
 
