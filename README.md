@@ -1,51 +1,53 @@
-# Проект 4: Место
-
+# Mesto
 ___
-Проектная работа в рамках обучения в Яндекс.Практикуме на курсе "Вэб-разработчик".
 
-Интерактивный сервис Mesto по мотивам социальных сетей. 
-На сервесе доступно редактирование профиля и аватара.
-Сервис позволяет делиться карточками (постами) с другими пользователями. Ставить likes и просматривать изображения в полном размере. Так же, возможно удалить ранее созданную карточку.
 
-Данный проект разработан  на чистом JS.
+This repository contains the original version of the project Mesto in vanilla JS. Mesto is an application based on the social network Instagram.
 
-Реализацию проекта с использованием CRA (Create React App) можно посмотреть [тут](https://github.com/TuretskayaIrina/mesto-react)
+You can see the CRA (Create React App) version of the project [here](https://github.com/TuretskayaIrina/react-mesto-auth)
+### Tech
+___
 
-В данном проекте используются следующие технологии:
 1. HTML
- - Адаптивная кроссбраузерная верстка
+ - adaptive and cross-browser layout
 2. CSS
 - Flex
 - Grid
-- Подключение сторонних шрифтов
 3. Java Script
-- Oткрытие/закрытие попапов
-- Лайф-валидация форм
-- Редактирование профиля
-- Добавление/удаление карточек
-- Добавление/удаление like
-- ООП
-4.
 
-Так же используется:
- - REST API
- - HTTP протокол
- - NPM
- - Webpack
- - Babel
- - Post CSS
- - БЭМ методология
- - Nested файловая структура по БЭМ
- - Работа с дизайн-макетом Figma
- - GIT
- ___
+4. Webpack
+5. Babel
+6. Post CSS
+7. BEM
+8. Nested
+9. Figma
 
-**Figma**
+### Design
+___
 
-* [Первая часть макета в Figma](https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4?node-id=80%3A76)
-* [Вторая часть макета в Figma](https://www.figma.com/file/nlYpT4VhFiwimn2YlncrcF/JavaScript.-Sprint-5?node-id=90%3A378)
-* [Третья часть макета в Figma](https://www.figma.com/file/hhhIavVTeuilfPPZ6sbifl/JavaScript.-Sprint-9?node-id=4002%3A309)
+* [The first part in Figma](https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4?node-id=80%3A76)
+* [The second part in Figma](https://www.figma.com/file/nlYpT4VhFiwimn2YlncrcF/JavaScript.-Sprint-5?node-id=90%3A378)
+* [The third part in Figma](https://www.figma.com/file/hhhIavVTeuilfPPZ6sbifl/JavaScript.-Sprint-9?node-id=4002%3A309)
 
-**Deploy**
 
-* [Ссылка на готовый проект](https://turetskayairina.github.io/mesto/index.html)
+### Installation
+___
+
+Mesto requires [Node.js](https://nodejs.org/) v13+ to run.
+
+Install the dependencies...
+```sh
+$ npm install 
+```
+
+#### Building
+___
+To build use the command
+```sh
+$ npm run build
+```
+
+### Deploy
+___
+
+https://turetskayairina.github.io/mesto/index.html
